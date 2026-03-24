@@ -2,18 +2,22 @@ import { axiosInstance } from "./axiosInstance";
 
 export interface LoginApiResponse {
   data: {
+    data: { 
     tokens: {
       access_token: string;
     };
   };
 }
+}
 
 export interface SignupApiResponse {
   data?: {
+    data?: {
     tokens?: {
       access_token?: string;
     };
   };
+}
 }
 
 export const loginApi = async (phone: string, password: string): Promise<LoginApiResponse> => {

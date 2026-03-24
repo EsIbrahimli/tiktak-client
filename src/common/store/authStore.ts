@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { login as loginApi, register as registerApi } from "../../services/authApi";
+import { loginApi, registerApi } from "../../services/authApi";
 
 export interface LoginRequest {
 	phone: string;
