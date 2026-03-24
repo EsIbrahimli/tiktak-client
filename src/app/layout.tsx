@@ -27,7 +27,11 @@ export default function RootLayout({
     >
       <body className="h-full  flex flex-col overflow-hidden">
         <HeaderVisibility />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 bg-gray-100">
+          <div className=" w-[80%] mx-auto h-full">
+          {children}
+          </div>
+          </div>
       </body>
     </html>
   );
