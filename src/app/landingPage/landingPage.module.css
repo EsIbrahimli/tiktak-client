@@ -1,0 +1,76 @@
+/* Slider container */
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 50px;
+}
+
+/* Slides wrapper: yan-yana */
+.slidesWrapper {
+  display: flex;
+  gap: 20px; 
+   border: 2px solid red;          /* kartlar arası məsafə */
+}
+
+/* Hər bir kart */
+.slide {
+  min-width: 600px;
+  max-width: 650px;
+  height: auto; /* hündürlük contentə uyğun olsun */
+  display: flex;
+  flex-direction: column; /* contenti yuxarıdan aşağıya düz */
+  align-items: center;
+  justify-content: flex-start; /* content üst tərəfdən başlasın */
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.slide h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+ 
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* Düymələr */
+.button {
+  background: rgba(0,0,0,0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.button:hover {
+  background: rgba(0,0,0,0.3);
+}
+.slideImg {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.buttonCard {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.buttonCard:hover {
+  background: rgba(255,255,255,0.3);
+}
