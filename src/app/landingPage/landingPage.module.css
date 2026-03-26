@@ -1,4 +1,12 @@
-/* Slider container */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto; 
+}
+
+
 .sliderContainer {
   display: flex;
   align-items: center;
@@ -7,7 +15,7 @@
   margin-top: 50px;
 }
 
-/* Slides wrapper: yan-yana */
+
 .slidesWrapper {
   display: flex;
   gap: 20px; 
@@ -18,25 +26,51 @@
 .slide {
   min-width: 600px;
   max-width: 650px;
-  height: auto; /* hündürlük contentə uyğun olsun */
+ height: 300px; 
   display: flex;
-  flex-direction: column; /* contenti yuxarıdan aşağıya düz */
+  flex-direction: column; 
   align-items: center;
-  justify-content: flex-start; /* content üst tərəfdən başlasın */
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  justify-content: flex-start; 
+ position: relative;
   color: white;
   border-radius: 16px;
   font-size: 1.2rem;
-  padding: 20px;
+  padding: 0;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.slide h2 {
-  margin-bottom: 10px;
-  font-size: 1.5rem;
+
+.slideTitle {
+
  
-  flex-direction: row;
-  align-items: flex-start;
+  color: white;
+  font-size: 1.5rem;
+  
+  
+  margin: 0;
+}
+.slideContent {
+  position: absolute;
+  top: 20px; 
+  left: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column; 
+  gap: 5px;               
+  z-index: 10;
+  color: white;
+  
+}
+.slideDescription {
+ 
+ 
+
+  color: white;
+  font-size: 1rem;
+ 
+  margin: 0;
 }
 
 /* Düymələr */
@@ -55,25 +89,233 @@
 .button:hover {
   background: rgba(0,0,0,0.3);
 }
+.buttonContainer {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
 .slideImg {
   width: 100%;
-  height: 140px;
+  aspect-ratio: 16/9;
+  height: 300px;
   object-fit: cover;
   border-radius: 12px;
-  margin-bottom: 10px;
+  
+  display: block;
 }
 .buttonCard {
   background: rgba(255,255,255,0.1);
   border: none;
   border-radius: 8px;
-  padding: 10px 20px;
+  padding: 8px 16px;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s ease;
-  position: relative;
-  z-index: 10;
+  max-width: 100px;
+  
+
 }
 
 .buttonCard:hover {
   background: rgba(255,255,255,0.3);
+}
+/* Statik kartlar container */
+.staticCardsContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+/* Hər bir kart */
+.staticCard {
+  position: relative;
+  width: 600px;
+  max-width: 650px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.staticCard:hover {
+  transform: scale(1.05); 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+/* Şəkil */
+.staticCardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay */
+.staticCardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.staticCardOverlay h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.staticCardOverlay p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+.title1 {
+  margin-left: 140px;
+  font-size: 2rem;
+  margin-top: 40px;
+  color: rgb(113, 201, 26);
+  font-weight: bold;
+}
+.text {
+  margin-left: 140px;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  
+}
+.title2 {
+  margin-left: 140px;
+  font-size: 1.5rem;
+  margin-top: 40px;
+  color: rgb(40, 41, 39);
+  font-weight: bold;
+}
+/* Footer */
+.footer {
+ 
+
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 0;
+  
+}
+
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footerColumn {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footerColumn h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.footerColumn p, .footerColumn a {
+  font-size: 0.9rem;
+  color: #fff;
+  text-decoration: none;
+  margin-bottom: 5px;
+}
+
+.footerColumn a:hover {
+  text-decoration: underline;
+}
+
+.footerBottom {
+  
+  font-size: 0.8rem;
+  color: #ccc;
+}
+.footer {
+  
+  padding: 40px 20px;
+  border-top: 1px solid #eee;
+  font-family: Arial, sans-serif;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.links div h4 {
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.links div ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+}
+
+.links div ul li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  text-align: left;
+}
+
+.subscribe {
+  display: flex;
+  gap: 8px;
+}
+
+.subscribe input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.subscribe button {
+  background: #28a745;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding-top: 0;
+  font-size: 12px;
+  color: #777;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.social {
+  display: flex;
+  gap: 12px;
+  color: #28a745;
+  font-size: 16px;
 }
