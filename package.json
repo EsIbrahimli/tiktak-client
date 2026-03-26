@@ -14,7 +14,11 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-icons": "^5.6.0",
+<<<<<<< HEAD
     "swiper": "^12.1.2",
+=======
+    "react-toastify": "^11.0.5",
+>>>>>>> main
     "zustand": "^5.0.12"
   },
   "devDependencies": {
