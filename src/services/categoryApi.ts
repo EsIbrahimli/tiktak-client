@@ -15,8 +15,3 @@ export const getCategories = async (): Promise<unknown> => {
   return res.data;
 };
 
-// GET BY SLUG
-export const getCategoryBySlug = async (slug: string): Promise<unknown> => {
-  const res = await axiosInstance.get(`/categories/${slug}`);
-  return res.data;
-};

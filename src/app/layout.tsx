@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import HeaderVisibility from "@/common/components/Header/HeaderVisibility";
+import RouteContainer from "@/common/components/Layout/RouteContainer";
+import ToastProvider from "@/common/components/Toast/ToastProvider";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -25,9 +27,12 @@ export default function RootLayout({
       lang="en"
       className={`${roboto.variable} h-full antialiased`}
     >
-      <body className="h-full  flex flex-col overflow-hidden">
+      <body className="h-full  flex flex-col">
+        <ToastProvider />
         <HeaderVisibility />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 bg-gray-100 overflow-y-auto">
+          <RouteContainer>{children}</RouteContainer>
+        </div>
       </body>
     </html>
   );

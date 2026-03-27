@@ -1,0 +1,155 @@
+.loginContainer {
+    display: flex;
+    height: 100vh;
+}
+
+.loginImageContainer {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    background-color: #92D871;
+}
+
+.loginForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 50%;
+}
+
+.loginFormPanel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 460px;
+    min-height: 420px;
+    gap: 24px;
+}
+
+.loginFormHeader {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    border-bottom: 2px solid #e0e0e0;
+    width: 100%;
+    justify-content: center;
+}
+
+
+.loginFormHeader .loginLink,
+.loginFormHeader .registerLink {
+    color: #aaa;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 10px;
+    margin-bottom: -2px;
+}
+
+
+.activeTab {
+    color: #2B3043 !important;
+    border-bottom: 2px solid #92D871 !important;
+}
+
+.loginLink:hover,
+.registerLink:hover {
+    color: #92D871;
+}
+
+
+
+.loginFormBody {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    flex: 1;
+}
+
+.loginFormBody label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #2B3043;
+}
+
+.loginFormBody input {
+    padding: 12px 14px;
+    border: 1px solid #d9d6e8;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ECEFF3 !important;
+    color: #2B3043;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.loginFormBody input:focus {
+    border-color: #92D871;
+    background-color: #ECEFF3 !important;
+}
+
+.loginFormBody input:-webkit-autofill,
+.loginFormBody input:-webkit-autofill:hover,
+.loginFormBody input:-webkit-autofill:focus,
+.loginFormBody input:-webkit-autofill:active {
+    -webkit-text-fill-color: #2B3043 !important;
+    -webkit-box-shadow: 0 0 0 1000px #ECEFF3 inset !important;
+    box-shadow: 0 0 0 1000px #ECEFF3 inset !important;
+    background-color: #ECEFF3 !important;
+}
+
+
+
+.loginFormBody input.inputError {
+    border-color: #e53935;
+}
+
+.formInput{
+    margin-top: 8px;
+    padding: 12px;
+    background-color: #92D871;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.loginFormBody button:hover {
+    background-color: #7bc45e;
+}
+
+.loginFormBody p {
+    text-align: center;
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.registerHere {
+    color: #92D871;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 4px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+.loginTitle{
+    color:#2B3043;
+    font-size: 70px;
+    font-weight: 800;
+    padding: 20px;
+}
+
+.loginImage {
+    width: 1200px;
+    height: 1200px;
+}

@@ -1,0 +1,316 @@
+.container {
+  width: 100%;
+}
+
+.sliderContainer {
+  position: relative;
+  width: fit-content;
+  margin: 50px auto 0;
+}
+
+.slidesWrapper {
+  display: flex;
+  gap: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.fading {
+  opacity: 0.8;
+}
+
+/* Hər bir kart */
+.slide {
+  min-width: 650px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  color: white;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  padding: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+
+.slideTitle {
+  color: white;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.slideContent {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 10;
+  color: white;
+}
+
+.slideDescription {
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Navigation buttons over slide */
+.button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 20;
+}
+
+.button:first-of-type {
+  left: 10px;
+}
+
+.button:last-of-type {
+  right: 10px;
+}
+
+.button:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.06);
+}
+
+.buttonContainer {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+
+.slideImg {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.buttonCard {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  max-width: 100px;
+
+
+}
+
+.buttonCard:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Statik kartlar container */
+.staticCardsContainer {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* Hər bir kart */
+.staticCard {
+  position: relative;
+  width: 650px;
+  height: 320px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, all 0.3s ease;
+}
+
+.staticCard:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Şəkil */
+.staticCardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay */
+.staticCardOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  height: 100%;
+}
+
+.staticCardOverlay h3 {
+  padding: 20px 0px 0px 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.staticCardOverlay p {
+  padding: 0px 0px 0px 10px;
+  font-size: 12px;
+  color: #ddd;
+}
+
+.title1 {
+  font-size: 2rem;
+  margin-top: 60px;
+  color: rgb(59, 95, 23);
+  font-weight: bold;
+}
+
+.text {
+  font-size: 14px;
+  color: rgb(82, 82, 82);
+}
+
+.title2 {
+  font-size: 1.5rem;
+  margin-top: 80px;
+  color: rgb(40, 41, 39);
+  font-weight: bold;
+}
+
+/* Footer */
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer {
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  font-family: Arial, sans-serif;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.footerColumn a:hover {
+  text-decoration: underline;
+}
+
+.footerBottom {
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+.links div h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.links div ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+}
+
+.links div ul li {
+  margin-bottom: 8px;
+  cursor: pointer;
+  color: rgb(82, 82, 82);
+  font-size: 14px;
+  text-align: left;
+}
+
+.subscribe {
+  display: flex;
+  gap: 8px;
+}
+
+.subscribe input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+}
+
+.subscribe button {
+  font-size: 14px;
+  background: #57a632;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.socialInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid  rgb(212, 212, 212);
+  font-size: 12px;
+  color: #777;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 30px 0px 40px 0px;
+}
+
+.social {
+  display: flex;
+  gap: 12px;
+  font-size: 16px;
+}
+
+.social a {
+  color: #57a632;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease, transform 0.2s ease;
+}
+
+.social a:hover {
+  opacity: 0.6;;
+  transform: scale(1.2);
+}
