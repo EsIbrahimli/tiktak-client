@@ -1,94 +1,100 @@
-html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto; 
+.container {
+  width: 100%;
 }
-
 
 .sliderContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 50px;
+  position: relative;
+  width: fit-content;
+  margin: 50px auto 0;
 }
-
 
 .slidesWrapper {
   display: flex;
-  gap: 20px; 
-  
+  gap: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.fading {
+  opacity: 0.8;
 }
 
 /* Hər bir kart */
 .slide {
-  min-width: 600px;
-  max-width: 650px;
- height: 300px; 
+  min-width: 650px;
+  height: 320px;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-start; 
- position: relative;
+  justify-content: flex-start;
+  position: relative;
   color: white;
   border-radius: 16px;
   font-size: 1.2rem;
   padding: 0;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
   overflow: hidden;
 }
 
 
 .slideTitle {
-
- 
   color: white;
   font-size: 1.5rem;
-  
-  
   margin: 0;
 }
+
 .slideContent {
   position: absolute;
-  top: 20px; 
+  top: 20px;
   left: 20px;
   right: 20px;
   display: flex;
-  flex-direction: column; 
-  gap: 5px;               
+  flex-direction: column;
+  gap: 5px;
   z-index: 10;
   color: white;
-  
 }
-.slideDescription {
- 
- 
 
+.slideDescription {
   color: white;
   font-size: 1rem;
- 
   margin: 0;
 }
 
-/* Düymələr */
+/* Navigation buttons over slide */
 .button {
-  background: rgba(0,0,0,0.1);
-  border: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.2rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease;
-  z-index: 10;
+  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 20;
+}
+
+.button:first-of-type {
+  left: 10px;
+}
+
+.button:last-of-type {
+  right: 10px;
 }
 
 .button:hover {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.06);
 }
+
 .buttonContainer {
   position: absolute;
   bottom: 20px;
@@ -98,17 +104,17 @@ html, body {
   gap: 6px;
   z-index: 10;
 }
+
 .slideImg {
   width: 100%;
+  display: block;
   aspect-ratio: 16/9;
-  height: 300px;
   object-fit: cover;
   border-radius: 12px;
-  
-  display: block;
 }
+
 .buttonCard {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   border: none;
   border-radius: 8px;
   padding: 8px 16px;
@@ -116,36 +122,36 @@ html, body {
   cursor: pointer;
   transition: background 0.2s ease;
   max-width: 100px;
-  
+
 
 }
 
 .buttonCard:hover {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255, 255, 255, 0.3);
 }
+
 /* Statik kartlar container */
 .staticCardsContainer {
   display: flex;
   gap: 20px;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 /* Hər bir kart */
 .staticCard {
   position: relative;
-  width: 600px;
-  max-width: 650px;
-  height: 300px;
+  width: 650px;
+  height: 320px;
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, all 0.3s ease;
 }
 
 .staticCard:hover {
-  transform: scale(1.05); 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Şəkil */
@@ -161,54 +167,48 @@ html, body {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
+  height: 100%;
 }
 
 .staticCardOverlay h3 {
-  margin: 0;
-  font-size: 1.2rem;
+  padding: 20px 0px 0px 10px;
+  font-size: 20px;
   font-weight: bold;
 }
 
 .staticCardOverlay p {
-  margin: 0;
-  font-size: 0.9rem;
+  padding: 0px 0px 0px 10px;
+  font-size: 12px;
+  color: #ddd;
 }
+
 .title1 {
-  margin-left: 140px;
   font-size: 2rem;
-  margin-top: 40px;
-  color: rgb(113, 201, 26);
+  margin-top: 60px;
+  color: rgb(59, 95, 23);
   font-weight: bold;
 }
+
 .text {
-  margin-left: 140px;
-  font-size: 1.2rem;
-  margin-top: 10px;
-  
+  font-size: 14px;
+  color: rgb(82, 82, 82);
 }
+
 .title2 {
-  margin-left: 140px;
   font-size: 1.5rem;
-  margin-top: 40px;
+  margin-top: 80px;
   color: rgb(40, 41, 39);
   font-weight: bold;
 }
+
 /* Footer */
-.footer {
- 
-
-  padding: 40px 20px;
-  text-align: center;
-  margin-top: 0;
-  
-}
-
 .footerContent {
   max-width: 1200px;
   margin: 0 auto;
@@ -218,35 +218,8 @@ html, body {
   gap: 20px;
 }
 
-.footerColumn {
-  flex: 1;
-  min-width: 200px;
-}
-
-.footerColumn h4 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.footerColumn p, .footerColumn a {
-  font-size: 0.9rem;
-  color: #fff;
-  text-decoration: none;
-  margin-bottom: 5px;
-}
-
-.footerColumn a:hover {
-  text-decoration: underline;
-}
-
-.footerBottom {
-  
-  font-size: 0.8rem;
-  color: #ccc;
-}
 .footer {
-  
-  padding: 40px 20px;
+  margin-top: 20px;
   border-top: 1px solid #eee;
   font-family: Arial, sans-serif;
 }
@@ -258,8 +231,18 @@ html, body {
   margin-bottom: 30px;
 }
 
+.footerColumn a:hover {
+  text-decoration: underline;
+}
+
+.footerBottom {
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
 .links div h4 {
   margin-bottom: 10px;
+  font-size: 16px;
   font-weight: 600;
   text-align: left;
 }
@@ -268,13 +251,13 @@ html, body {
   list-style: none;
   padding: 0;
   margin: 0;
-  
+
 }
 
 .links div ul li {
   margin-bottom: 8px;
   cursor: pointer;
-  color: #333;
+  color: rgb(82, 82, 82);
   font-size: 14px;
   text-align: left;
 }
@@ -285,13 +268,16 @@ html, body {
 }
 
 .subscribe input {
-  padding: 6px 10px;
+  padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  outline: none;
+  font-size: 14px;
 }
 
 .subscribe button {
-  background: #28a745;
+  font-size: 14px;
+  background: #57a632;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -299,23 +285,32 @@ html, body {
   cursor: pointer;
 }
 
-.bottom {
+.socialInfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid #eee;
-  padding-top: 0;
+  border-top: 1px solid  rgb(212, 212, 212);
   font-size: 12px;
   color: #777;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 0;
-  padding-bottom: 0;
+  padding: 30px 0px 40px 0px;
 }
 
 .social {
   display: flex;
   gap: 12px;
-  color: #28a745;
   font-size: 16px;
+}
+
+.social a {
+  color: #57a632;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.social a:hover {
+  color: #fff;
+  transform: scale(1.2);
 }

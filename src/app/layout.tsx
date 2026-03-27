@@ -27,10 +27,10 @@ export default function RootLayout({
       lang="en"
       className={`${roboto.variable} h-full antialiased`}
     >
-      <body className="h-full  flex flex-col overflow-hidden">
+      <body className="h-full  flex flex-col">
         <ToastProvider />
         <HeaderVisibility />
-        <div className="flex-1 bg-gray-100">
+        <div className="flex-1 bg-gray-100 overflow-y-auto">
           <RouteContainer>{children}</RouteContainer>
         </div>
       </body>
