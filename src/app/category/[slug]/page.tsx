@@ -20,6 +20,8 @@ export default function CategoryDetailPage() {
 
   if (!selectedCategory) return <p>Kateqoriya tapılmadı</p>;
 
+
+
   return (
     <div style={{ padding: "20px" }}>
       <h1>{selectedCategory.name}</h1>
@@ -33,5 +35,6 @@ export default function CategoryDetailPage() {
 
       <p>{selectedCategory.description}</p>
     </div>
+
   );
 }
