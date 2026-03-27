@@ -73,19 +73,35 @@
 
 .loginFormBody input {
     padding: 12px 14px;
-    border: 1px solid #f4f1f1;
+    border: 1px solid #d9d6e8;
     border-radius: 8px;
     font-size: 15px;
     outline: none;
     transition: border-color 0.2s;
     width: 100%;
     box-sizing: border-box;
-    background-color: #F6F5FB;
+    background-color: #ECEFF3 !important;
+    color: #2B3043;
+    -webkit-appearance: none;
+    appearance: none;
 }
 
 .loginFormBody input:focus {
     border-color: #92D871;
+    background-color: #ECEFF3 !important;
 }
+
+.loginFormBody input:-webkit-autofill,
+.loginFormBody input:-webkit-autofill:hover,
+.loginFormBody input:-webkit-autofill:focus,
+.loginFormBody input:-webkit-autofill:active {
+    -webkit-text-fill-color: #2B3043 !important;
+    -webkit-box-shadow: 0 0 0 1000px #ECEFF3 inset !important;
+    box-shadow: 0 0 0 1000px #ECEFF3 inset !important;
+    background-color: #ECEFF3 !important;
+}
+
+
 
 .loginFormBody input.inputError {
     border-color: #e53935;

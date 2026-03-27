@@ -1,14 +1,14 @@
 
 "use client";
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { AxiosError } from 'axios';
 import styles from './login.module.css'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '../../../common/store/authStore';
 import Loading from '../../../common/components/Loading/Loading';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 export default function Login() {
@@ -24,7 +24,7 @@ export default function Login() {
     password: false,
   });
 
-  const { loading, token, login, signup } = useAuthStore();
+  const { loading, login, signup } = useAuthStore();
 
   const normalizePhone = useCallback((value: string) => {
     const digitsOnly = value.replace(/\D/g, '');
@@ -47,14 +47,6 @@ export default function Login() {
 
     return '';
   }, []);
-
-  useEffect(() => {
-    setError('');
-    if (!isRegisterMode) {
-      setName('');
-      setInputError((prev) => ({ ...prev, name: false }));
-    }
-  }, [isRegisterMode]);
 
   const markInputsAsError = useCallback((fields: Array<'name' | 'phone' | 'password'>) => {
     setInputError((prev) => {
@@ -126,6 +118,7 @@ export default function Login() {
           password,
         });
         toast.success('Daxil olma uğurlu oldu');
+        await new Promise((resolve) => setTimeout(resolve, 800));
         router.push('/landingPage');
       }
 
@@ -136,6 +129,11 @@ export default function Login() {
     } catch (error) {
       const axiosError = error as AxiosError<{ message?: string | string[] }>;
       const message = axiosError.response?.data?.message;
+
+      if (axiosError.response?.status === 500) {
+        setError('Serverdə xəta yarandı, bir az sonra yenidən cəhd edin');
+        return;
+      }
 
       if (Array.isArray(message) && message.length > 0) {
         setError(message[0]);
@@ -151,15 +149,8 @@ export default function Login() {
     }
   }, [isRegisterMode, login, markInputsAsError, name, normalizePhone, password, phone, router, signup]);
 
-  useEffect(() => {
-    if (token) {
-      setError('');
-    }
-  }, [token]);
-
   return (
     <>
-      <ToastContainer position="top-right" autoClose={2500} hideProgressBar={false} closeOnClick />
       {loading ? (
         <Loading fullScreen />
       ) : (
@@ -175,14 +166,22 @@ export default function Login() {
                   <button
                     type="button"
                     className={`${styles.loginLink} ${!isRegisterMode ? styles.activeTab : ''}`}
-                    onClick={() => setIsRegisterMode(false)}
+                    onClick={() => {
+                      setIsRegisterMode(false);
+                      setName('');
+                      setError('');
+                      setInputError((prev) => ({ ...prev, name: false }));
+                    }}
                   >
                     Daxil ol
                   </button>
                   <button
                     type="button"
                     className={`${styles.registerLink} ${isRegisterMode ? styles.activeTab : ''}`}
-                    onClick={() => setIsRegisterMode(true)}
+                    onClick={() => {
+                      setIsRegisterMode(true);
+                      setError('');
+                    }}
                   >
                     Qeydiyyatdan keç
                   </button>
@@ -225,7 +224,17 @@ export default function Login() {
               <button
                 type="button"
                 className={styles.registerHere}
-                onClick={() => setIsRegisterMode((prev) => !prev)}
+                onClick={() => {
+                  setIsRegisterMode((prev) => {
+                    const next = !prev;
+                    if (!next) {
+                      setName('');
+                      setInputError((state) => ({ ...state, name: false }));
+                    }
+                    return next;
+                  });
+                  setError('');
+                }}
               >
                 {isRegisterMode ? 'Daxil ol' : 'Qeydiyyatdan keç'}
               </button>
