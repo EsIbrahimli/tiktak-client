@@ -9,6 +9,10 @@ export const axiosInstance = axios.create({
 
 
 axiosInstance.interceptors.request.use((config) => {
+  if (typeof window === "undefined") {
+    return config;
+  }
+
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -22,10 +26,10 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
-      localStorage.removeItem("token")
-      window.location.href = "/login"
+    if (typeof window !== "undefined" && error.response?.status === 401) {
+      localStorage.removeItem("token");
+      window.location.href = "/auth/login";
     }
-    return Promise.reject(error)
-  }
-)
+    return Promise.reject(error);
+  },
+);

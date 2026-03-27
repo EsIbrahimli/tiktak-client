@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useCategoriesStore } from "@/common/store/categoryStore";
 import styles from "./categories.module.css";
+import Loading from "@/common/components/Loading/Loading";
 
 export default function CategoriesPage() {
   const { categories, fetchCategories, loading } = useCategoriesStore();
@@ -14,7 +15,7 @@ export default function CategoriesPage() {
     fetchCategories();
   }, [fetchCategories]);
 
-  if (loading) return <p>Yüklənir...</p>;
+  if (loading) return <Loading />;
 
   return (
     <div className={styles.wrapper}>
@@ -34,17 +35,16 @@ export default function CategoriesPage() {
           <div
             key={cat.id}
             className={styles.card}
-            onClick={() => router.push(`/category/${cat.slug}`)}
+            onClick={() => router.push(`/category/${cat.id}`)}
           >
-            {/* <div className={styles.imageWrapper}>
+            <div className={styles.imageWrapper}>
               <Image
                 src={cat.img_url}
-                alt={cat.name || "category"}
+                alt={cat.name || 'Category image'}
                 width={90}
                 height={90}
               />
-            </div> */}
-
+            </div>
             <p className={styles.name}>{cat.name}</p>
           </div>
         ))}
