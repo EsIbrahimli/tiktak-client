@@ -1,0 +1,133 @@
+.container {
+  padding: 30px;
+  background: #f5f6f8;
+}
+
+.breadcrumb {
+  color: #8a8a8a;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 25px;
+}
+
+/* LEFT */
+.left {
+  background: #fff;
+  border-radius: 16px;
+  padding: 25px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.label {
+  color: #666;
+}
+
+.value {
+  font-weight: 500;
+}
+
+.textarea {
+  width: 100%;
+  height: 90px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-top: 10px;
+  resize: none;
+}
+
+/* PAYMENT */
+.paymentTitle {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.paymentBox {
+  display: flex;
+  gap: 15px;
+}
+
+.option {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.active {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
+
+/* BUTTON */
+.button {
+  margin-top: 25px;
+  background: #2f3443;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 12px;
+  width: 250px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* RIGHT */
+.right {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  height: fit-content;
+}
+
+.summaryTitle {
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.divider {
+  height: 1px;
+  background: #eee;
+  margin: 15px 0;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.final {
+  font-size: 18px;
+}
+.active {
+  border-color: #22c55e;
+  background: #f0fdf4;
+}
