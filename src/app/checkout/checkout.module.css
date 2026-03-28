@@ -28,23 +28,39 @@
   padding: 25px;
 }
 
+.form{
+  display: flex;;
+  justify-content: space-between;
+}
+
+.info{
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
 .infoRow {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   margin-bottom: 15px;
 }
 
-.label {
-  color: #666;
+.infoRow:first-child {
+ gap:20px;
 }
 
-.value {
+.infoRow:last-child {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.label {
   font-weight: 500;
 }
 
 .textarea {
-  width: 100%;
+  width: 300px;
   height: 90px;
+  font-size: 14px;
   border-radius: 10px;
   border: 1px solid #ddd;
   padding: 10px;
@@ -82,7 +98,8 @@
 
 /* BUTTON */
 .button {
-  margin-top: 25px;
+  display: block;
+  margin: 25px auto 0;
   background: #2f3443;
   color: white;
   border: none;
