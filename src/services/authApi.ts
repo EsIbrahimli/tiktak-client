@@ -1,64 +1,129 @@
 import { axiosInstance } from "./axiosInstance";
 
-
-const normalizePhone = (value: string) => {
-  const trimmed = value.trim();
-  let digitsOnly = trimmed.replace(/\D/g, "");
-
-  if (!digitsOnly) return trimmed;
-
-  if (digitsOnly.startsWith("00")) {
-    digitsOnly = digitsOnly.slice(2);
-  }
-
-  if (digitsOnly.startsWith("9940") && digitsOnly.length === 13) {
-    digitsOnly = `994${digitsOnly.slice(4)}`;
-  }
-
-  if (digitsOnly.length === 10 && digitsOnly.startsWith("0")) {
-    digitsOnly = `994${digitsOnly.slice(1)}`;
-  }
-
-  if (digitsOnly.length === 9) {
-    digitsOnly = `994${digitsOnly}`;
-  }
-
-  return `+${digitsOnly}`;
-};
-
-
-const isEmail = (value: string) => /\S+@\S+\.\S+/.test(value);
-const isPhone = (value: string) => /^\+?\d{7,15}$/.test(value.replace(/\s/g, ""));
-
-
 export interface Account {
-  id: number;
-  name: string;
-  email: string;
-  phone?: string;
+  id?: string | number;
+  name?: string;
+  full_name?: string;
+  email?: string;
+  phone?: number | string;
+  adress?: string;
+  password?: string;
+  password_confirm?: string;
 }
 
+export interface AuthApiResponse {
+  data?: {
+    data?: {
+      tokens?: {
+        access_token?: string;
+      };
+    };
+  };
+}
+
+export type LoginApiResponse = AuthApiResponse;
+export type SignupApiResponse = AuthApiResponse;
+
+export const loginApi = async (phone: string, password: string): Promise<LoginApiResponse> => {
+  try {
+    const response = await axiosInstance.post("/auth/login", { phone, password });
+    return response;
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
+  }
+};
+
+export const registerApi = async (
+  fullName: string,
+  phone: string,
+  password: string
+): Promise<SignupApiResponse> => {
+  try {
+    const response = await axiosInstance.post("/auth/signup", {
+      full_name: fullName,
+      phone,
+      password,
+    });
+    return response;
+  } catch (error) {
+    console.error("Registration error:", error);
+    throw error;
+  }
+};
 
 export const getAccount = async (): Promise<Account> => {
-  const res = await axiosInstance.get("/auth/account");
-  return res.data;
+  try {
+    const response = await axiosInstance.get("/profile");
+    const data = (response.data?.data ?? response.data ?? {}) as Record<string, unknown>;
+
+    return {
+      id: data.id as string | number | undefined,
+      name: (data.name as string | undefined) ?? (data.full_name as string | undefined) ?? "",
+      full_name: data.full_name as string | undefined,
+      email: (data.email as string | undefined) ?? "",
+      phone: (data.phone as number | undefined) ?? "",
+      password: undefined, // Şifrə serverdən gəlməməlidir
+      password_confirm: undefined,
+      adress: data.adress as string | undefined,
+    };
+  } catch (error) {
+    console.error("Get account error:", error);
+    throw error;
+  }
 };
 
-export const updateAccount = async (data: Partial<Account>): Promise<Account> => {
-  const res = await axiosInstance.put("/auth/account", data);
-  return res.data;
-};
+export const updateAccount = async (payload: Partial<Account>): Promise<Account> => {
+  try {
+    const fullName = (payload.name ?? payload.full_name ?? "").toString().trim();
+    const phone = (payload.phone ?? "").toString().trim();
+    const email = (payload.email ?? "").toString().trim();
+    const adress = (payload.adress ?? "").toString().trim();
+    const password = (payload.password ?? "").toString().trim();
+    const passwordConfirm = (payload.password_confirm ?? "").toString().trim();
 
+    const baseBody: Record<string, string> = {
+      full_name: fullName,
+      phone,
+    };
 
-export const AuthApi = {
-  login: async (identifier: string, password: string) => {
-    let payload: any = { password };
+    if (password) {
+      baseBody.password = password;
+      baseBody.password_confirm = passwordConfirm;
+    }
 
-    if (isEmail(identifier)) payload.email = identifier.trim();
-    else if (isPhone(identifier)) payload.phone = normalizePhone(identifier);
-    else payload.username = identifier.trim();
+    const variants: Array<Record<string, string>> = [
+      { ...baseBody, ...(email ? { email } : {}), ...(adress ? { adress } : {}) },
+      { ...baseBody, ...(email ? { email } : {}), ...(adress ? { address: adress } : {}) },
+      { ...baseBody, ...(adress ? { adress } : {}) },
+      { ...baseBody, ...(adress ? { address: adress } : {}) },
+      { ...baseBody },
+    ];
 
-    const res = await axiosInstance.post("/auth/admin/login", payload);
-    return res.data;
-  },
+    let lastError: unknown = null;
+
+    for (const body of variants) {
+      try {
+        await axiosInstance.put("/profile", body);
+        lastError = null;
+        break;
+      } catch (error) {
+        const status = (error as { response?: { status?: number } })?.response?.status;
+        lastError = error;
+        if (status !== 400) {
+          throw error;
+        }
+      }
+    }
+
+    if (lastError) {
+      throw lastError;
+    }
+
+    // Yenilənmiş məlumatı birbaşa profildən götürürük ki həmişə doğru olsun.
+    return await getAccount();
+  } catch (error) {
+    console.error("Update account error:", error);
+    throw error;
+  }
 };

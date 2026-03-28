@@ -1,5 +1,6 @@
 "use client";
-
+import { IoMdPerson } from "react-icons/io";
+import { MdShoppingBag } from "react-icons/md";
 import { useSearchParams } from "next/navigation";
 import styles from "./account.module.css";
 import AccountInfo from "./AccountInfo";
@@ -11,30 +12,25 @@ export default function AccountPage() {
 
   return (
     <div className={styles.wrapper}>
-      {/* Sidebar */}
       <div className={styles.sidebar}>
         <h3>Hesabım</h3>
-
         <a
           href="/account"
-          className={`${styles.menuItem} ${
-            !section ? styles.active : ""
-          }`}
+          className={`${styles.menuItem} ${!section ? styles.active : ""
+            }`}
         >
+          <IoMdPerson style={{ marginRight: 8 }} />
           Hesab məlumatlarım
         </a>
-
         <a
           href="/account?section=orders"
-          className={`${styles.menuItem} ${
-            section === "orders" ? styles.active : ""
-          }`}
+          className={`${styles.menuItem} ${section === "orders" ? styles.active : ""
+            }`}
         >
+          <MdShoppingBag style={{ marginRight: 8 }} />
           Sifarişlərim
         </a>
       </div>
-
-      {/* Content */}
       <div className={styles.content}>
         {section === "orders" ? <OrdersPage /> : <AccountInfo />}
       </div>
