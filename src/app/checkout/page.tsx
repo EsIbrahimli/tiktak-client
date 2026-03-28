@@ -3,7 +3,10 @@
 import { useState } from "react";
 import styles from "./checkout.module.css";
 import { useCartStore } from "../../common/store/checkoutStore";
-import { AxiosInstance } from "axios";
+
+import ConfirmModal from "./checkoutModal";
+
+import  {axiosInstance}  from "../../services/axiosInstance";
 
 export default function Checkout() {
   const items = useCartStore((state) => state.items);
@@ -14,6 +17,7 @@ export default function Checkout() {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const total = items.reduce(
     (sum, item) => sum + parseFloat(item.price || item.total_price),
@@ -33,7 +37,7 @@ export default function Checkout() {
 
     const orderData = {
       total: total.toFixed(2),
-      deliveryFee: "0.00", // istəyə görə dəyişə bilərsən
+      deliveryFee: "0.00", 
       paymentMethod: payment.toUpperCase(),
       note,
       address,
@@ -47,7 +51,7 @@ export default function Checkout() {
     try {
       setLoading(true);
       const { data } = await axiosInstance.post(
-        "/orders/checkout", // POST endpoint
+        "/orders/checkout", 
         orderData
       );
       console.log("Sifariş tamamlandı:", data);
@@ -133,14 +137,22 @@ export default function Checkout() {
             </div>
           </div>
 
-          <button
+          <button onClick={() => setShowModal(true)}
             className={styles.button}
-            onClick={handleOrder}
+           
             disabled={loading}
           >
             {loading ? "Göndərilir..." : "Sifarişi tamamla"}
           </button>
         </div>
+        <ConfirmModal
+  open={showModal}
+  onClose={() => setShowModal(false)}
+  onConfirm={async () => {
+    setShowModal(false);
+    await handleOrder(); // sənin POST funksiyan
+  }}
+/>
 
         {/* RIGHT */}
         <div className={styles.right}>
@@ -173,5 +185,6 @@ export default function Checkout() {
         </div>
       </div>
     </div>
+    
   );
 }
