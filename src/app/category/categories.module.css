@@ -165,7 +165,8 @@
   flex-wrap: wrap;
   gap: 16px;
   align-content: flex-start;
-  margin-top: 70px;
+  margin-top: 60px;
+  padding-top:20px;
 }
 
 .productCard {
