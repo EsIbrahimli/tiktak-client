@@ -1,6 +1,177 @@
 
+"use client";
+import { useState } from "react";
+import styles from "./checkout.module.css";
+import { useCartStore } from "../../common/store/checkoutStore";
+import { AxiosInstance } from "axios";
+
 export default function Checkout() {
+  const items = useCartStore((state) => state.items);
+  const clearCart = useCartStore((state) => state.clearCart);
+
+  const [payment, setPayment] = useState("cash");
+  const [note, setNote] = useState("");
+  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const total = items.reduce(
+    (sum, item) => sum + parseFloat(item.price || item.total_price),
+    0
+  );
+
+  const handleOrder = async () => {
+    if (!address || !phone) {
+      alert("Ünvan və nömrə daxil edin");
+      return;
+    }
+
+    if (items.length === 0) {
+      alert("Səbət boşdur");
+      return;
+    }
+
+    const orderData = {
+      total: total.toFixed(2),
+      deliveryFee: "0.00", // istəyə görə dəyişə bilərsən
+      paymentMethod: payment.toUpperCase(),
+      note,
+      address,
+      phone,
+      items: items.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      })),
+    };
+
+    try {
+      setLoading(true);
+      const { data } = await axiosInstance.post(
+        "/orders/checkout", // POST endpoint
+        orderData
+      );
+      console.log("Sifariş tamamlandı:", data);
+
+      clearCart();
+      alert("Sifariş tamamlandı ✅");
+    } catch (err) {
+      console.error("Xəta baş verdi:", err);
+      alert("Xəta baş verdi ❌");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div>Checkout</div>
+    <div className={styles.container}>
+      <div className={styles.breadcrumb}>Ana səhifə / Meyvələr</div>
+      <div className={styles.title}>Sifarişin tamamlanması</div>
+
+      <div className={styles.wrapper}>
+        {/* LEFT */}
+        <div className={styles.left}>
+          <div className={styles.infoRow}>
+            <div>
+              <div className={styles.label}>Adınız</div>
+              <div className={styles.value}>Admin</div>
+            </div>
+            <div>
+              <div className={styles.label}>Əlavə qeyd</div>
+              <textarea
+                className={styles.textarea}
+                placeholder="Əlavə qeydiniz varsa buraya daxil edin"
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className={styles.infoRow}>
+            <div>
+              <div className={styles.label}>Ünvanınız</div>
+              <input
+                type="text"
+                className={styles.value}
+                placeholder="Ünvanınızı daxil edin"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <div className={styles.label}>Nömrəniz</div>
+              <input
+                type="text"
+                className={styles.value}
+                placeholder="Nömrənizi daxil edin"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className={styles.paymentTitle}>Ödəniş metodunu seçin:</div>
+          <div className={styles.paymentBox}>
+            <div
+              className={`${styles.option} ${
+                payment === "cash" ? styles.active : ""
+              }`}
+              onClick={() => setPayment("cash")}
+            >
+              Qapıda nəğd ödəmə
+              <input type="radio" checked={payment === "cash"} readOnly />
+            </div>
+
+            <div
+              className={`${styles.option} ${
+                payment === "card" ? styles.active : ""
+              }`}
+              onClick={() => setPayment("card")}
+            >
+              Qapıda kart ilə ödəmə
+              <input type="radio" checked={payment === "card"} readOnly />
+            </div>
+          </div>
+
+          <button
+            className={styles.button}
+            onClick={handleOrder}
+            disabled={loading}
+          >
+            {loading ? "Göndərilir..." : "Sifarişi tamamla"}
+          </button>
+        </div>
+
+        {/* RIGHT */}
+        <div className={styles.right}>
+          <div className={styles.summaryTitle}>Xülasə</div>
+          {items.map((item) => (
+            <div key={item.id} className={styles.item}>
+              <span>
+                {item.quantity} x {item.product?.title || item.title}
+              </span>
+              <span>{item.total_price || item.price} ₼</span>
+            </div>
+          ))}
+
+          <div className={styles.divider}></div>
+
+          <div className={styles.item}>
+            <span>Ümumi:</span>
+            <span>{total.toFixed(2)} ₼</span>
+          </div>
+
+          <div className={styles.item}>
+            <span>Çatdırılma:</span>
+            <span>Pulsuz</span>
+          </div>
+
+          <div className={`${styles.total} ${styles.final}`}>
+            <span>Yekun məbləğ</span>
+            <span>{total.toFixed(2)} ₼</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
