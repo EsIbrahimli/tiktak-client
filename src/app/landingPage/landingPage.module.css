@@ -277,7 +277,7 @@
 
 .subscribe button {
   font-size: 14px;
-  background: #57a632;
+  background: #19793b;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -304,7 +304,7 @@
 }
 
 .social a {
-  color: #57a632;
+  color: #19793b;
   display: flex;
   align-items: center;
   transition: all 0.2s ease, transform 0.2s ease;
