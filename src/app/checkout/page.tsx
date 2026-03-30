@@ -4,6 +4,7 @@ import { useState } from "react";
 import styles from "./checkout.module.css";
 import { useCartStore } from "../../common/store/checkoutStore";
 import { createCheckoutOrder } from "../../services/checkoutApi";
+import ConfirmModal from "./checkoutModal";
 import { toast } from "react-toastify";
 
 export default function Checkout() {

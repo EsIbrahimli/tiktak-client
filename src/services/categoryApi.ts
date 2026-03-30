@@ -15,3 +15,4 @@ export const getCategories = async (): Promise<unknown> => {
   return res.data;
 };
 
+
