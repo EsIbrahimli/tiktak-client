@@ -3,10 +3,8 @@
 import { useState } from "react";
 import styles from "./checkout.module.css";
 import { useCartStore } from "../../common/store/checkoutStore";
-
-import ConfirmModal from "./checkoutModal";
-
-import  {axiosInstance}  from "../../services/axiosInstance";
+import { createCheckoutOrder } from "../../services/checkoutApi";
+import { toast } from "react-toastify";
 
 export default function Checkout() {
   const items = useCartStore((state) => state.items);
@@ -20,7 +18,7 @@ export default function Checkout() {
   const [showModal, setShowModal] = useState(false);
 
   const total = items.reduce(
-    (sum, item) => sum + parseFloat(item.price || item.total_price),
+    (sum, item) => sum + Number(item.price) * Number(item.quantity),
     0
   );
 
@@ -50,17 +48,13 @@ export default function Checkout() {
 
     try {
       setLoading(true);
-      const { data } = await axiosInstance.post(
-        "/orders/checkout", 
-        orderData
-      );
+      const data = await createCheckoutOrder(orderData);
       console.log("Sifariş tamamlandı:", data);
-
       clearCart();
-      alert("Sifariş tamamlandı ✅");
+      toast.success("Sifarişiniz uğurla tamamlandı!");
     } catch (err) {
       console.error("Xəta baş verdi:", err);
-      alert("Xəta baş verdi ❌");
+      toast.error("Sifariş tamamlanmadı. Yenidən cəhd edin.");
     } finally {
       setLoading(false);
     }
@@ -72,14 +66,41 @@ export default function Checkout() {
       <div className={styles.title}>Sifarişin tamamlanması</div>
 
       <div className={styles.wrapper}>
+
         {/* LEFT */}
         <div className={styles.left}>
-          <div className={styles.infoRow}>
-            <div>
-              <div className={styles.label}>Adınız</div>
-              <div className={styles.value}>Admin</div>
+          <div className={styles.info}>Əlaqə məlumatları</div>
+          <div className={styles.form}>
+            <div className={styles.infoRow}>
+              <div className={styles.row}>
+                <div className={styles.label}>Adınız</div>
+                <div className={styles.value}>Admin</div>
+              </div>
+
+              <div className={styles.row}>
+                <div className={styles.label}>Ünvanınız</div>
+                <input
+                  type="text"
+                  className={styles.value}
+                  placeholder="Ünvanınızı daxil edin"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                />
+              </div>
+
+              <div className={styles.row}>
+                <div className={styles.label}>Nömrəniz</div>
+                <input
+                  type="text"
+                  className={styles.value}
+                  placeholder="Nömrənizi daxil edin"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
             </div>
-            <div>
+
+            <div className={styles.infoRow}>
               <div className={styles.label}>Əlavə qeyd</div>
               <textarea
                 className={styles.textarea}
@@ -89,37 +110,11 @@ export default function Checkout() {
               />
             </div>
           </div>
-
-          <div className={styles.infoRow}>
-            <div>
-              <div className={styles.label}>Ünvanınız</div>
-              <input
-                type="text"
-                className={styles.value}
-                placeholder="Ünvanınızı daxil edin"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-
-            <div>
-              <div className={styles.label}>Nömrəniz</div>
-              <input
-                type="text"
-                className={styles.value}
-                placeholder="Nömrənizi daxil edin"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </div>
-          </div>
-
           <div className={styles.paymentTitle}>Ödəniş metodunu seçin:</div>
           <div className={styles.paymentBox}>
             <div
-              className={`${styles.option} ${
-                payment === "cash" ? styles.active : ""
-              }`}
+              className={`${styles.option} ${payment === "cash" ? styles.active : ""
+                }`}
               onClick={() => setPayment("cash")}
             >
               Qapıda nəğd ödəmə
@@ -127,9 +122,8 @@ export default function Checkout() {
             </div>
 
             <div
-              className={`${styles.option} ${
-                payment === "card" ? styles.active : ""
-              }`}
+              className={`${styles.option} ${payment === "card" ? styles.active : ""
+                }`}
               onClick={() => setPayment("card")}
             >
               Qapıda kart ilə ödəmə
@@ -160,9 +154,9 @@ export default function Checkout() {
           {items.map((item) => (
             <div key={item.id} className={styles.item}>
               <span>
-                {item.quantity} x {item.product?.title || item.title}
+                {item.quantity} x {item.title}
               </span>
-              <span>{item.total_price || item.price} ₼</span>
+              <span>{(Number(item.price) * Number(item.quantity)).toFixed(2)} ₼</span>
             </div>
           ))}
 

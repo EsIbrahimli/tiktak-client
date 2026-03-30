@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import { IoMdPerson } from "react-icons/io";
 import { MdShoppingBag } from "react-icons/md";
 import { useSearchParams } from "next/navigation";
@@ -6,7 +7,7 @@ import styles from "./account.module.css";
 import AccountInfo from "./AccountInfo";
 import OrdersPage from "./orders/page";
 
-export default function AccountPage() {
+function AccountPageContent() {
   const params = useSearchParams();
   const section = params.get("section");
 
@@ -35,5 +36,13 @@ export default function AccountPage() {
         {section === "orders" ? <OrdersPage /> : <AccountInfo />}
       </div>
     </div>
+  );
+}
+
+export default function AccountPage() {
+  return (
+    <Suspense fallback={null}>
+      <AccountPageContent />
+    </Suspense>
   );
 }
