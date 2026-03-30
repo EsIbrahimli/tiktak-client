@@ -6,7 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useCategoriesStore } from '@/common/store/categoryStore';
 import { useProductsStore } from '@/common/store/productsStore';
-import MyBasket from '@/common/components/myBasket/page';
+import MyBasket from '@/common/components/MyBasket/page';
 import styles from '../categories.module.css';
 import Loading from '@/common/components/Loading/Loading';
 

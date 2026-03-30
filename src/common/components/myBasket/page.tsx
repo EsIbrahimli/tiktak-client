@@ -1,4 +1,4 @@
-import styles from './myBasket.module.css'
+import styles from './MyBasket.module.css'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Image from 'next/image';
 
