@@ -1,9 +1,5 @@
+import MyBasket from '@/common/components/myBasket/page';
 
-
-export default function Basket() {
-	return (
-        <div>
-            <Basket />
-        </div>
-    );
+export default function BasketPage() {
+    return <MyBasket />;
 }
