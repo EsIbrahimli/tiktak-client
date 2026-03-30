@@ -6,7 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useCategoriesStore } from '@/common/store/categoryStore';
 import { useProductsStore } from '@/common/store/productsStore';
-import myBasket from '@/common/components/myBasket/page';
+import Basket from '@/common/components/myBasket/page';
 import styles from '../categories.module.css';
 import Loading from '@/common/components/Loading/Loading';
 
@@ -106,7 +106,7 @@ export default function CategoryDetailPage() {
           ))
         )}
       </div>
-      <Basket />
+      <myBasket />
     </div>
 
   );

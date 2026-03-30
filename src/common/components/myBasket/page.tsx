@@ -2,7 +2,7 @@ import styles from './myBasket.module.css'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Image from 'next/image';
 
-const Basket = () => {
+const myBasket = () => {
     return (
         <div className={styles.container}>
             <h2 className={styles.basketTitle}>Səbətim</h2>
@@ -39,4 +39,4 @@ const Basket = () => {
     );
 }
 
-export default Basket;
+export default myBasket;
