@@ -6,6 +6,7 @@ import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useCategoriesStore } from '@/common/store/categoryStore';
 import { useProductsStore } from '@/common/store/productsStore';
+import { useBasketStore } from '@/common/store/basketStore';
 import MyBasket from '@/common/components/MyBasket/page';
 import styles from '../categories.module.css';
 import Loading from '@/common/components/Loading/Loading';
@@ -18,10 +19,17 @@ export default function CategoryDetailPage() {
 
   const { categories, selectedCategory, fetchCategoryById, fetchCategories, loading: catLoading } = useCategoriesStore();
   const { products, fetchProductsByCategory, loading: prodLoading } = useProductsStore();
+  const { items: basketItems, addItem, removeItem, fetchBasket } = useBasketStore();
+
+  const getBasketQuantity = (productId: number) => {
+    const item = (basketItems ?? []).find((i) => i.product_id === productId);
+    return item ? item.quantity : 0;
+  };
 
   useEffect(() => {
     fetchCategories();
-  }, [fetchCategories]);
+    fetchBasket();
+  }, [fetchCategories, fetchBasket]);
 
 
   useEffect(() => {
@@ -101,7 +109,21 @@ export default function CategoryDetailPage() {
               <p className={styles.productPrice}>
                 {product.price} ₼{product.unit ? ` / ${product.unit}` : ''}
               </p>
-              <button className={styles.addBtn}>Səbətə əlavə et</button>
+              {getBasketQuantity(product.id) > 0 ? (
+                <div className={styles.quantityControl}>
+                  <button
+                    className={styles.reduceBtn}
+                    onClick={() => removeItem(product.id)}
+                  >-</button>
+                  <span className={styles.quantityDisplay}>{getBasketQuantity(product.id)}kg</span>
+                  <button
+                    className={styles.increaseBtn}
+                    onClick={() => addItem(product.id)}
+                  >+1kg</button>
+                </div>
+              ) : (
+                <button className={styles.addBtn} onClick={() => addItem(product.id)}>Səbətə əlavə et</button>
+              )}
             </div>
           ))
         )}
