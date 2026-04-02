@@ -106,7 +106,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background-color: #92d871;
+  background-color: #75cb4e;
   padding: 5px;
   border-radius: 10px;
 }
@@ -193,14 +193,19 @@
 .checkoutButton {
   display: block;
   margin: 20px auto 0;
-  background: #92d871;
+  background:#75cb4e;
   color: white;
   border: none;
   padding: 10px 14px;
   border-radius: 8px;
-  width: 280px;
+  width: 100%;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.checkoutButton:hover {
+  background-color: #92d871;
 }
 
 .basketHeader {
