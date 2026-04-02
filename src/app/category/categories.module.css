@@ -242,3 +242,49 @@
   margin-top: 20px;
 }
 
+.quantityControl {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.reduceBtn {
+  background-color: #f29294;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.reduceBtn:hover {
+  background-color: #e07678;
+}
+
+.increaseBtn {
+  background-color: #75cb4e;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.increaseBtn:hover {
+  background-color: #5fb43c;
+}
+
+.quantityDisplay {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2B3043;
+  min-width: 28px;
+  text-align: center;
+}
+

@@ -21,6 +21,24 @@
     padding: 16px;
 }
 
+.basketItems{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    max-height: 320px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.basketItems::-webkit-scrollbar {
+    width: 6px;
+}
+
+.basketItems::-webkit-scrollbar-thumb {
+    background: #c9ced8;
+    border-radius: 10px;
+}
+
 .basketItem{
     display: flex;
     justify-content: space-between;
@@ -28,7 +46,7 @@
     padding: 10px;
     background-color: #f3f4f6;
     border-bottom: 1px solid #eee;
-    border-radius: 6px;
+    border-radius: 10px;
 }
 
 .itemDetails{
@@ -40,7 +58,7 @@
 .itemInfo{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap:4px;
 }   
 
@@ -54,6 +72,12 @@
     display: flex;
     align-items: center;
     gap: 6px;
+}
+
+.quantityControl span{
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
 }
 
 .reduceBtn{
@@ -79,6 +103,23 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
+}
+
+.deleteIcon {
+    cursor: pointer;
+    color: #f29294;
+    font-size: 18px;
+}
+
+.deleteIcon:hover {
+    color: #e07678;
+}
+
+.emptyBasket {
+    font-size: 14px;
+    color: #999;
+    text-align: center;
+    padding: 16px 0;
 }
 
 .basketTotal{

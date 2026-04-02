@@ -20,7 +20,6 @@ export interface Product {
 
 export const getProductsByCategory = async (categoryId: number): Promise<unknown> => {
   const requests = [
-    () => axiosInstance.get(`/products/${categoryId}`),
     () => axiosInstance.get(`/products`, { params: { category: categoryId } }),
     () => axiosInstance.get(`/products`, { params: { category_id: categoryId } }),
   ];
