@@ -11,6 +11,8 @@ import MyBasket from '@/common/components/MyBasket/page';
 import styles from '../categories.module.css';
 import Loading from '@/common/components/Loading/Loading';
 
+  import { useFavoriteStore } from '@/common/store/favoriteStore';
+
 
 export default function CategoryDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -20,6 +22,7 @@ export default function CategoryDetailPage() {
   const { categories, selectedCategory, fetchCategoryById, fetchCategories, loading: catLoading } = useCategoriesStore();
   const { products, fetchProductsByCategory, loading: prodLoading } = useProductsStore();
   const { items: basketItems, addItem, removeItem, fetchBasket } = useBasketStore();
+  const { toggleFavorite, isFavorite } = useFavoriteStore();
 
   const getBasketQuantity = (productId: number) => {
     const item = (basketItems ?? []).find((i) => i.product_id === productId);
@@ -95,7 +98,20 @@ export default function CategoryDetailPage() {
           <p className={styles.emptyState}>Bu kateqoriyada məhsul tapılmadı.</p>
         ) : (
           filteredProducts.map((product) => (
-            <div key={product.id} className={styles.productCard}>
+            <div key={product.id} className={styles.productCard}  onClick={() => router.push(`/product/${product.id}`)}>
+               <div
+    className={styles.heart}
+    onClick={() =>
+      toggleFavorite({
+        id: product.id,
+        name: product.title || product.name,
+        price: product.price,
+        img_url: product.img_url,
+      })
+    }
+  >
+    {isFavorite(product.id) ? "❤️" : "🤍"}
+  </div>
               <div className={styles.productImageWrapper}>
                 <Image className={styles.productImage}
                   src={product.img_url}
