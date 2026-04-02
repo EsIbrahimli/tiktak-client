@@ -2,25 +2,38 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 30px;
-  gap: 30px;
+  margin-top: 10px;
+  gap: 40px;
 }
 
 .basketTitle {
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 300;
   padding-bottom: 12px;
 }
 
-
-.basket {
+.basketHeader {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 600px;
-  height: auto;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  margin-bottom: 0px;
+  padding-bottom: 2px !important;
+}
+
+.basketHeader h2 {
+  align-self: flex-start;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.basketHeaderActions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.basketHeaderActions h1 {
+  font-size: 26px;
 }
 
 .basketItems {
@@ -28,10 +41,19 @@
   flex-direction: column;
   gap: 10px;
   overflow-y: auto;
-  padding-right: 4px;
-
-  max-width: 800px;
+  max-width: 700px;
   width: 100%;
+}
+
+.basketCleanBtn {
+  font-size: 14px;
+  border: none;
+  cursor: pointer;
+  color: #a1a1a1;
+}
+
+.basketCleanBtn:hover {
+  background-color: #f3f4f6;
 }
 
 .basketItems::-webkit-scrollbar {
@@ -47,10 +69,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background-color: #f3f4f6;
+  padding: 10px 16px 10px 10px;
+  background-color: #fff;
   border-bottom: 1px solid #eee;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
 
 .itemDetails {
@@ -70,6 +93,13 @@
   font-size: 14px;
   font-weight: 600;
   color: #333;
+}
+
+.itemImage {
+  width: 80px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: contain;
 }
 
 .quantityControl {
@@ -129,31 +159,35 @@
   padding: 16px 0;
 }
 
+.basketTotalWrapper {
+  margin-top: 52px;
+  width: 400px;
+}
+
 .basketTotal {
-  max-width: 350px;
   width: 100%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px;
 }
 
 .basketTotal h2 {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 400;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #555;
 }
 
 .basketTotal h3 {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 600;
   color: #2f3443;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.basketTotal h3 span {
-  font-size: 24px;
-  font-weight: bold;
 }
 
 .checkoutButton {
@@ -196,12 +230,16 @@
 .finalTotal {
   font-size: 18px;
   font-weight: bold;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
-h2.totalTitle {
-  font-size: 18px;
+.finalTotal span {
+  color: #2f3443;
+  font-size: 22px;
+}
+
+.totalTitle {
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 10px;
-  margin-top: 0;
+  margin-bottom: 20px;
 }

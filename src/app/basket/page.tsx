@@ -1,6 +1,4 @@
 
-
-
 "use client";
 
 
@@ -12,6 +10,7 @@ import { useBasketStore } from "@/common/store/basketStore";
 import { useRouter } from "next/navigation";
 
 const Basket = () => {
+
   const {
     items: rawItems,
     total_price: rawTotal,
@@ -20,6 +19,7 @@ const Basket = () => {
     removeAllOfItem,
     fetchBasket,
   } = useBasketStore();
+
   const items = rawItems ?? [];
   const total_price = rawTotal ?? 0;
   const router = useRouter();
@@ -32,8 +32,11 @@ const Basket = () => {
     <div className={styles.container}>
       <div className={styles.basketItems}>
         <div className={styles.basketHeader}>
+          <h2>Ana səhifə / Meyvələr</h2>
+          <div className={styles.basketHeaderActions}>
           <h1>Səbətim</h1>
-          <button>Səbəti Təmizlə</button>
+          <button className={styles.basketCleanBtn}>Səbəti Təmizlə</button>
+          </div>
         </div>
         {items.length === 0 ? (
           <p>Your basket is empty</p>
@@ -84,9 +87,10 @@ const Basket = () => {
           })
         )}
       </div>
-
+       
+       <div className={styles.basketTotalWrapper}>
+       <h2 className={styles.totalTitle}>Yekun məbləğ</h2>
       <div className={styles.basketTotal}>
-        <h2 className={styles.totalTitle}>Yekun məbləğ</h2>
         <h2>
           Ümumi: <span>{Number(total_price).toFixed(2)} ₼</span>
         </h2>
@@ -103,6 +107,7 @@ const Basket = () => {
           Sifarişi tamamla
         </button>
       </div>
+    </div>
     </div>
   );
 };
