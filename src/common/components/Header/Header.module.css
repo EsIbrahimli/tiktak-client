@@ -39,6 +39,37 @@
 .link:hover {
     color: #76CB4F;
 }
+.address {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.address svg {
+  color: orange;
+}
+.title {
+  font-size: 12px;
+  color: gray;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 13px;
+  margin: 0;
+}
+
+/* SEARCH */
+.search input {
+  width: 300px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.nav {
+    display: flex;
+}
 
 
 
