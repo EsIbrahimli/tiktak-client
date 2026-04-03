@@ -1,9 +1,11 @@
 "use client";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 import { IoPersonOutline } from "react-icons/io5";
 import { MdFavoriteBorder } from "react-icons/md";
 import { SlBasket } from "react-icons/sl";
 import { IoLocationOutline } from "react-icons/io5";
+import { useAccountStore } from "@/common/store/accountStore";
 
 import Link from "next/link";
 import styles from "./Header.module.css";
@@ -15,6 +17,11 @@ const Header = () => {
     const pathname = usePathname();
     const normalizedPath = pathname.toLowerCase();
     const isLanding = normalizedPath === "/" || normalizedPath.startsWith("/landingpage");
+    const { account, fetchAccount } = useAccountStore();
+
+    useEffect(() => {
+        fetchAccount();
+    }, [fetchAccount]);
 
     return (
         <header className={styles.header}>
@@ -29,7 +36,7 @@ const Header = () => {
                             <IoLocationOutline size={18} />
                             <div>
                                 <p className={styles.title}>Ünvan</p>
-                                <p className={styles.subtitle}>Adres qeyd olunmayıb</p>
+                                <p className={styles.subtitle}>{account?.adress || "Ünvan qeyd olunmayıb"}</p>
                             </div>
                         </div>
                     )}

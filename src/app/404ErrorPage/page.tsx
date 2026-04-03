@@ -9,11 +9,11 @@ export default function Error404Page() {
         <Image
           src="/images/notfound.svg"
           alt="404 Error"
-          width={850}
-          height={500}
+          width={600}
+          height={450}
           className={styles.image}
         />
-        
+         </div>
         <div className={styles.textContainer}>
           <p className={styles.text}>
             Səhifə tapılmadı, deyəsən bir problem baş verib!
@@ -22,7 +22,6 @@ export default function Error404Page() {
             <button className={styles.button}>Geri qayıt</button>
           </Link>
         </div>
-      </div>
     </div>
   );
 }

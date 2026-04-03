@@ -65,7 +65,7 @@ export const getAccount = async (): Promise<Account> => {
       phone: (data.phone as number | undefined) ?? "",
       password: undefined, // Şifrə serverdən gəlməməlidir
       password_confirm: undefined,
-      adress: data.adress as string | undefined,
+      adress: (data.adress as string | undefined) ?? (data.address as string | undefined),
     };
   } catch (error) {
     console.error("Get account error:", error);

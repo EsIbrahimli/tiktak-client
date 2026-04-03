@@ -13,6 +13,7 @@ interface Product {
 const Search = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Product[]>([]);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     if (query.trim().length < 2) {
@@ -59,30 +60,40 @@ const Search = () => {
   const showDropdown = query.trim().length >= 2;
 
   return (
-    <div className={styles.searchBox}>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Axtarış"
-        value={query}
-        onChange={handleChange}
-      />
-
-      {showDropdown && results.length > 0 && (
-        <ul className={styles.results}>
-          {results.map((item) => (
-            <li key={item.id} className={styles.item}>
-              <span>{item.name}</span>
-              <span>{item.price}₼</span>
-            </li>
-          ))}
-        </ul>
+    <>
+      {isFocused && (
+        <div
+          className={styles.overlay}
+          onClick={() => setIsFocused(false)}
+        />
       )}
+      <div className={`${styles.searchBox} ${isFocused ? styles.searchBoxFocused : ""}`}>
+        <input
+          className={styles.input}
+          type="text"
+          placeholder="Axtarış"
+          value={query}
+          onChange={handleChange}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+        />
 
-      {showDropdown && results.length === 0 && (
-        <p className={styles.empty}>Nəticə tapılmadı</p>
-      )}
-    </div>
+        {showDropdown && results.length > 0 && (
+          <ul className={styles.results}>
+            {results.map((item) => (
+              <li key={item.id} className={styles.item}>
+                <span>{item.name}</span>
+                <span>{item.price}₼</span>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {showDropdown && results.length === 0 && (
+          <p className={styles.empty}>Nəticə tapılmadı</p>
+        )}
+      </div>
+    </>
   );
 };
 
