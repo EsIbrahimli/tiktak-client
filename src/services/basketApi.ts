@@ -20,9 +20,11 @@ const normalizeItems = (arr: unknown[]): BasketItem[] =>
     arr.map((i) => {
         const item = i as Record<string, unknown>;
         const product = (item.product as Record<string, unknown> | undefined) ?? {};
+        const resolvedProductId = Number(item.product_id ?? product.id ?? item.id ?? 0);
+
         return {
             ...item,
-            product_id: Number(item.product_id ?? item.id ?? 0),
+            product_id: resolvedProductId,
             title: String(item.title ?? product.title ?? item.name ?? product.name ?? ""),
             name: String(item.name ?? product.name ?? item.title ?? product.title ?? ""),
             img_url: String(item.img_url ?? item.url ?? product.img_url ?? product.url ?? ""),
