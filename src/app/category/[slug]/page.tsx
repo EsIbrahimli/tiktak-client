@@ -1,17 +1,16 @@
 "use client";
 
 import { useEffect } from 'react';
-import Link from 'next/link';
 import { useRouter, useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useCategoriesStore } from '@/common/store/categoryStore';
 import { useProductsStore } from '@/common/store/productsStore';
 import { useBasketStore } from '@/common/store/basketStore';
 import MyBasket from '@/common/components/MyBasket/page';
+import CategorySidebar from '@/common/components/CategorySidebar/CategorySidebar';
 import styles from '../categories.module.css';
 import Loading from '@/common/components/Loading/Loading';
-
-  import { useFavoriteStore } from '@/common/store/favoriteStore';
+import { useFavoriteStore } from '@/common/store/favoriteStore';
 
 
 export default function CategoryDetailPage() {
@@ -60,36 +59,11 @@ export default function CategoryDetailPage() {
 
   return (
     <div className={styles.categoryDetail}>
-      <div className={styles.categoryDetailInfo}>
-        <p className={styles.breadcrumb}>
-          <button className={styles.breadcrumbLink} onClick={() => router.push('/category')}>
-            Ana Səhifə
-          </button>
-          {' / '}{selectedCategory.name}
-        </p>
-        <h1 className={styles.categoryDetailTitle}>Kateqoriyalar</h1>
-        <div className={styles.categoryNameWrapper}>
-          {categories.map((cat) => (
-            <Link
-              key={cat.id}
-              href={`/category/${cat.id}`}
-              className={`${styles.categoryName} ${Number(slug) === cat.id ? styles.activeCategoryName : ''}`}
-            >
-              {cat.name}
-            </Link>
-          ))}
-        </div>
-        <div className={styles.categoryImageWrapper}>
-          <Image
-            src='/images/category.svg'
-            alt={'Category image'}
-            priority
-            loading="eager"
-            width={300}
-            height={480}
-          />
-        </div>
-      </div>
+      <CategorySidebar
+        categories={categories}
+        activeCategoryId={selectedCategoryId}
+        breadcrumbLabel={selectedCategory.name}
+      />
 
       <div className={styles.categoryCards}>
         {prodLoading ? (
@@ -98,20 +72,21 @@ export default function CategoryDetailPage() {
           <p className={styles.emptyState}>Bu kateqoriyada məhsul tapılmadı.</p>
         ) : (
           filteredProducts.map((product) => (
-            <div key={product.id} className={styles.productCard}  onClick={() => router.push(`/product/${product.id}`)}>
-               <div
-    className={styles.heart}
-    onClick={() =>
-      toggleFavorite({
-        id: product.id,
-        name: product.title || product.name,
-        price: product.price,
-        img_url: product.img_url,
-      })
-    }
-  >
-    {isFavorite(product.id) ? "❤️" : "🤍"}
-  </div>
+            <div key={product.id} className={styles.productCard} onClick={() => router.push(`/product/${product.id}`)}>
+              <div
+                className={styles.heart}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleFavorite({
+                    id: product.id,
+                    title: product.title || product.name || "Məhsul",
+                    price: product.price,
+                    img_url: product.img_url,
+                  });
+                }}
+              >
+                {isFavorite(product.id) ? "❤️" : "🤍"}
+              </div>
               <div className={styles.productImageWrapper}>
                 <Image className={styles.productImage}
                   src={product.img_url}
@@ -129,21 +104,36 @@ export default function CategoryDetailPage() {
                 <div className={styles.quantityControl}>
                   <button
                     className={styles.reduceBtn}
-                    onClick={() => removeItem(product.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      removeItem(product.id);
+                    }}
                   >-</button>
                   <span className={styles.quantityDisplay}>{getBasketQuantity(product.id)}kg</span>
                   <button
                     className={styles.increaseBtn}
-                    onClick={() => addItem(product.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      addItem(product.id);
+                    }}
                   >+1kg</button>
                 </div>
               ) : (
-                <button className={styles.addBtn} onClick={() => addItem(product.id)}>Səbətə əlavə et</button>
+                <button
+                  className={styles.addBtn}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addItem(product.id);
+                  }}
+                >
+                  Səbətə əlavə et
+                </button>
               )}
             </div>
           ))
         )}
       </div>
+      
       <MyBasket />
     </div>
   );

@@ -103,7 +103,7 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 12px;
 }
 
 .breadcrumb {
@@ -222,7 +222,7 @@
 
 .addBtn {
   padding: 8px 14px;
-  background-color: #91d870;
+  background-color: #7bc45e;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -233,7 +233,7 @@
 }
 
 .addBtn:hover {
-  background-color: #7bc45e;
+  background-color: #91d870;
 }
 
 .emptyState {
@@ -287,6 +287,7 @@
   min-width: 28px;
   text-align: center;
 }
+
 .heart {
   position: absolute;
   top: 10px;

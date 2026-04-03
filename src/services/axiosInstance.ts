@@ -26,7 +26,14 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (typeof window !== "undefined" && error.response?.status === 401) {
       localStorage.removeItem("token");
-      window.location.href = "/auth/login";
+
+      const { protocol, pathname } = window.location;
+      const isHttpProtocol = protocol === "http:" || protocol === "https:";
+      const isAlreadyOnAuthPage = pathname.startsWith("/auth");
+
+      if (isHttpProtocol && !isAlreadyOnAuthPage) {
+        window.location.replace("/auth/login");
+      }
     }
     return Promise.reject(error);
   },

@@ -17,6 +17,7 @@ const Header = () => {
     const pathname = usePathname();
     const normalizedPath = pathname.toLowerCase();
     const isLanding = normalizedPath === "/" || normalizedPath.startsWith("/landingpage");
+    const is404Page = normalizedPath === "/404error" || normalizedPath.startsWith("/404error/");
     const { account, fetchAccount } = useAccountStore();
 
     useEffect(() => {
@@ -31,7 +32,7 @@ const Header = () => {
                         TIK TAK
                     </Link>
 
-                    {!isLanding && (
+                    {!isLanding && !is404Page && (
                         <div className={styles.address}>
                             <IoLocationOutline size={18} />
                             <div>
@@ -42,7 +43,7 @@ const Header = () => {
                     )}
                 </div>
 
-                {!isLanding && (
+                {!isLanding && !is404Page && (
                     <div className={styles.centerSection}>
                         <Search />
                     </div>

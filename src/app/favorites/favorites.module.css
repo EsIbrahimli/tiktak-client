@@ -1,13 +1,18 @@
 .container {
   display: flex;
   gap: 30px;
-  padding: 20px;
-
 }
 
 .left {
   flex: 3;
-   
+  margin-top: 30px;
+}
+
+.left h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #2B3043;
+  margin-bottom: 20px;
 }
 
 .right {
@@ -18,31 +23,71 @@
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
+}
 
- 
+.empytyfavorites {
+  font-size: 15px;
+  color: #999;
+  margin-top: 20px;
 }
 
 .card {
-  width: 200px;
-  padding: 15px;
+  width: 154px;
+  padding: 10px;
   border-radius: 12px;
   background: #f5f5f5;
   text-align: center;
-    
-  height: 220px;
   border-radius: 12px;
   background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
+
+.card:hover {
+  scale: 1.03;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .imageWrapper {
   position: relative;
   width: 100%;
-  height: 100px;
+  height: 80px;
   border-radius: 12px;
   overflow: hidden;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .image {
-  object-fit: cover;
-    width: 100%;
+  object-fit: contain;
+   width: 80px;
+}
+
+.productName {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+} 
+
+.productPrice {
+  font-size: 15px;
+  color: #2B3043;
+  margin-bottom: 0px !important;
+}
+
+.addButton {
+  margin-top: 10px;
+  padding: 8px 14px;
+  background-color: #75cb4e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.addButton:hover {
+  background-color: #8ed972;
 }

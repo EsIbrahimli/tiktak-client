@@ -1,10 +1,9 @@
-import ProductDetail from "@/app/product/[id]/page";
 import { create } from "zustand";
 import { getFavorites } from "@/services/favoritesApi";
 
 interface FavoriteItem {
   id: number;
-  name: string;
+  title: string;
   price: number;
   img_url?: string;
 }
@@ -13,7 +12,7 @@ interface FavoriteState {
   favorites: FavoriteItem[];
   toggleFavorite: (product: FavoriteItem) => void;
   isFavorite: (id: number) => boolean;
-   fetchFavorites: () => Promise<void>; 
+  fetchFavorites: () => Promise<void>;
 }
 
 export const useFavoriteStore = create<FavoriteState>((set, get) => ({
@@ -36,12 +35,14 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
   isFavorite: (id) => {
     return get().favorites.some((f) => f.id === id);
   },
-   fetchFavorites: async () => {
+
+  fetchFavorites: async () => {
     try {
       const data = await getFavorites(); // backend API çağırışı
-      set({ favorites: data });
+      set({ favorites: Array.isArray(data) ? data : [] });
     } catch (err) {
       console.error("Favorites fetch error:", err);
+      set({ favorites: [] });
     }
-}
+  }
 }));

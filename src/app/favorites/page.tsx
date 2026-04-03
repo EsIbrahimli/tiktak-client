@@ -13,9 +13,9 @@ export default function Favorites() {
   const { favorites, fetchFavorites, toggleFavorite, isFavorite } = useFavoriteStore();
   const { addItem } = useBasketStore();
 
-    useEffect(() => {
+  useEffect(() => {
     fetchFavorites();
-  }, []);
+  }, [fetchFavorites]);
 
   return (
     <div className={styles.container}>
@@ -26,15 +26,15 @@ export default function Favorites() {
 
            <div className={styles.grid}>
           {favorites.length === 0 ? (
-            <p>Sevimlilər siyahısı boşdur</p>
+            <p className={styles.empytyfavorites}>Sevimlilər siyahısı boşdur</p>
           ) : (
             favorites.map((item) => (
               <div key={item.id} className={styles.card}>
                 <Image
                   src={item.img_url || "/images/category.svg"}
                   alt={item.title}
-                  width={150}
-                  height={150}
+                  width={80}
+                  height={80}
                   className={styles.imageWrapper}
                 />
                 <p className={styles.productName}>{item.title}</p>
@@ -45,16 +45,9 @@ export default function Favorites() {
                 <div className={styles.cardButtons}>
                   <button
                     className={styles.addButton}
-                    onClick={() => addItem(item)}
+                    onClick={() => addItem(item.id)}
                   >
                     Səbətə əlavə et
-                  </button>
-
-                  <button
-                    className={styles.favoriteButton}
-                    onClick={() => toggleFavorite(item)}
-                  >
-                    {isFavorite(item.id) ? "❤️" : "🤍"}
                   </button>
                 </div>
               </div>
@@ -62,8 +55,6 @@ export default function Favorites() {
           )}
         </div>
       </div>
-
-        
 
       {/* SAĞ */}
       <div className={styles.right}>
