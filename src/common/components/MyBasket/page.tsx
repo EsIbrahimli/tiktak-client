@@ -13,6 +13,10 @@ const MyBasket = () => {
     const total_price = rawTotal ?? 0;
     const router = useRouter();
 
+    const calculateTotal = () => {
+        return items.reduce((sum, item) => sum + Number(item.total_price || 0), 0);
+    };
+
     useEffect(() => {
         fetchBasket();
     }, [fetchBasket]);
@@ -53,9 +57,9 @@ const MyBasket = () => {
                     )}
                 </div>
                 <div className={styles.basketTotal}>
-                    <h2>Ümumi: <span>{Number(total_price).toFixed(2)} ₼</span></h2>
+                    <h2>Ümumi: <span>{Number(calculateTotal()).toFixed(2)} ₼</span></h2>
                     <h2>Çatdırılma: <span>Pulsuz</span></h2>
-                    <h3>Yekun məbləğ: <span>₼ {Number(total_price).toFixed(2)}</span> </h3>
+                    <h3>Yekun məbləğ: <span>₼ {Number(calculateTotal()).toFixed(2)}</span> </h3>
                     <button className={styles.checkoutButton} onClick={() => router.push('/checkout')}>Sifarişi tamamla</button>
                 </div>
             </div>

@@ -1,6 +1,4 @@
-
 "use client";
-
 
 import { useEffect } from "react";
 import styles from "./basket.module.css";
@@ -10,10 +8,10 @@ import { useBasketStore } from "@/common/store/basketStore";
 import { useRouter } from "next/navigation";
 
 const Basket = () => {
-
   const {
     items: rawItems,
     total_price: rawTotal,
+    clearAll,
     addItem,
     removeItem,
     removeAllOfItem,
@@ -23,6 +21,10 @@ const Basket = () => {
   const items = rawItems ?? [];
   const total_price = rawTotal ?? 0;
   const router = useRouter();
+
+  const calculateTotal = () => {
+    return items.reduce((sum, item) => sum + Number(item.total_price || 0), 0);
+  };
 
   useEffect(() => {
     fetchBasket();
@@ -34,8 +36,13 @@ const Basket = () => {
         <div className={styles.basketHeader}>
           <h2>Ana səhifə / Meyvələr</h2>
           <div className={styles.basketHeaderActions}>
-          <h1>Səbətim</h1>
-          <button className={styles.basketCleanBtn}>Səbəti Təmizlə</button>
+            <h1>Səbətim</h1>
+            <button
+              className={styles.basketCleanBtn}
+              onClick={() => clearAll()}
+            >
+              Səbəti Təmizlə
+            </button>
           </div>
         </div>
         {items.length === 0 ? (
@@ -87,27 +94,27 @@ const Basket = () => {
           })
         )}
       </div>
-       
-       <div className={styles.basketTotalWrapper}>
-       <h2 className={styles.totalTitle}>Yekun məbləğ</h2>
-      <div className={styles.basketTotal}>
-        <h2>
-          Ümumi: <span>{Number(total_price).toFixed(2)} ₼</span>
-        </h2>
-        <h2>
-          Çatdırılma: <span>Pulsuz</span>
-        </h2>
-        <h3 className={styles.finalTotal}>
-          Yekun məbləğ: <span>₼ {Number(total_price).toFixed(2)}</span>{" "}
-        </h3>
-        <button
-          className={styles.checkoutButton}
-          onClick={() => router.push("/checkout")}
-        >
-          Sifarişi tamamla
-        </button>
+
+      <div className={styles.basketTotalWrapper}>
+        <h2 className={styles.totalTitle}>Yekun məbləğ</h2>
+        <div className={styles.basketTotal}>
+          <h2>
+            Ümumi: <span>{Number(calculateTotal()).toFixed(2)} ₼</span>
+          </h2>
+          <h2>
+            Çatdırılma: <span>Pulsuz</span>
+          </h2>
+          <h3 className={styles.finalTotal}>
+            Yekun məbləğ: <span>₼ {Number(calculateTotal()).toFixed(2)}</span>{" "}
+          </h3>
+          <button
+            className={styles.checkoutButton}
+            onClick={() => router.push("/checkout")}
+          >
+            Sifarişi tamamla
+          </button>
+        </div>
       </div>
-    </div>
     </div>
   );
 };
