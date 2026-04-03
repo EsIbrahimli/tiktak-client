@@ -66,7 +66,7 @@ export const removeFromBasket = async (productId: number): Promise<Basket> => {
 };
 
 export const clearBasket = async (): Promise<Basket> => {
-    const response = await axiosInstance.post("/basket/clear");
+    const response = await axiosInstance.delete("/basket/clear");
     return normalizeBasket(response.data ?? response);
 };
 
