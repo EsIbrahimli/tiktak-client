@@ -6,10 +6,11 @@ import { useCartStore } from "../../common/store/checkoutStore";
 import { createCheckoutOrder } from "../../services/checkoutApi";
 import ConfirmModal from "./checkoutModal";
 import { toast } from "react-toastify";
+import { useBasketStore } from "@/common/store/basketStore";  
 
 export default function Checkout() {
-  const items = useCartStore((state) => state.items);
-  const clearCart = useCartStore((state) => state.clearCart);
+  const items = useBasketStore((state) => state.items);
+  const clearAll = useBasketStore((state) => state.clearAll);
 
   const [payment, setPayment] = useState("cash");
   const [note, setNote] = useState("");
@@ -19,7 +20,7 @@ export default function Checkout() {
   const [showModal, setShowModal] = useState(false);
 
   const total = items.reduce(
-    (sum, item) => sum + Number(item.price) * Number(item.quantity),
+    (sum, item) => {return sum + Number(item.total_price || (item.price * item.quantity) || 0)},
     0
   );
 
@@ -42,7 +43,7 @@ export default function Checkout() {
       address,
       phone,
       items: items.map((item) => ({
-        productId: item.id,
+        productId: item.product_id,
         quantity: item.quantity,
       })),
     };
@@ -51,7 +52,7 @@ export default function Checkout() {
       setLoading(true);
       const data = await createCheckoutOrder(orderData);
       console.log("Sifariş tamamlandı:", data);
-      clearCart();
+      clearAll();
       toast.success("Sifarişiniz uğurla tamamlandı!");
     } catch (err) {
       console.error("Xəta baş verdi:", err);
@@ -153,11 +154,11 @@ export default function Checkout() {
         <div className={styles.right}>
           <div className={styles.summaryTitle}>Xülasə</div>
           {items.map((item) => (
-            <div key={item.id} className={styles.item}>
+            <div key={item.product_id} className={styles.item}>
               <span>
-                {item.quantity} x {item.title}
+                {item.quantity} x {item.name || item.title}
               </span>
-              <span>{(Number(item.price) * Number(item.quantity)).toFixed(2)} ₼</span>
+              <span>{(Number(item.total_price || (item.price *item.quantity) || 0)).toFixed(2)} ₼</span>
             </div>
           ))}
 
