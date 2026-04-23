@@ -260,6 +260,10 @@
   color: rgb(82, 82, 82);
   font-size: 14px;
   text-align: left;
+  
+}
+.links div ul li:hover {
+  color: #19793b;
 }
 
 .subscribe {

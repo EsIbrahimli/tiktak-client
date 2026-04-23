@@ -7,6 +7,7 @@ import 'antd/dist/reset.css';
 import { ShopOutlined, EnvironmentOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { Card, Col, Row, Statistic } from 'antd';
 import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn, FaTelegramPlane, FaMusic, FaWhatsapp } from 'react-icons/fa';
+import Link from "next/link";
 
 const resolveImageSrc = (src: string) => {
   try {
@@ -147,29 +148,29 @@ export default function LandingPage() {
             <div>
             <h4>Şirkət</h4>
             <ul>
-              <li>Xüsusi təkliflər</li>
-              <li>Haqqımızda</li>
-              <li>Kartlar</li>
-              <li>İcarəyə verməyə yeriniz var?</li>
+              <li><Link href="/unknown">Xüsusi təkliflər</Link></li>
+              <li><Link href="/unknown">Haqqımızda</Link></li>
+              <li><Link href="/unknown">Kartlar</Link></li>
+              <li><Link href="/unknown">İcarəyə verməyə yeriniz var?</Link></li>
             </ul>
             </div>
           </div>
           <div>
             <h4>Digər</h4>
             <ul>
-              <li>Xəbərlər</li>
-              <li>Karyera</li>
-              <li>Müştəri xidmətləri</li>
+              <li><Link href="/unknown">Xəbərlər</Link></li>
+              <li><Link href="/unknown">Karyera</Link></li>
+              <li><Link href="/unknown">Müştəri xidmətləri</Link></li>
             </ul>
           </div>
           <div>
             <h4>Hüquq</h4>
             <ul>
-              <li>İstifadə şərtləri</li>
-              <li>İmtina</li>
-              <li>Onlayn market</li>
-              <li>Marketlərimiz</li>
-              <li>Korporativ satış</li>
+              <li><Link href="/unknown">İstifadə şərtləri</Link></li>
+              <li><Link href="/unknown">İmtina</Link></li>
+              <li><Link href="/unknown">Onlayn market</Link></li>
+              <li><Link href="/unknown">Marketlərimiz</Link></li>
+              <li><Link href="/unknown">Korporativ satış</Link></li>
             </ul>
           </div>
           <div>

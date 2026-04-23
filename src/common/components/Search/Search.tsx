@@ -24,6 +24,11 @@ const Search = () => {
 
     const delay = setTimeout(() => {
       setLoading(true);
+      const normalize = (text: string) =>
+  text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
 
       axiosInstance
         .get("/products", { params: { search: query.trim() } })
@@ -32,6 +37,7 @@ const Search = () => {
           const data =Array.isArray(res.data?.data)
             ? res.data.data
             : [];
+            
 
           setResults(Array.isArray(data) ? data : []);
         })
