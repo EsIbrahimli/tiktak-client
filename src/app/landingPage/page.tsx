@@ -8,6 +8,12 @@ import { ShopOutlined, EnvironmentOutlined, ShoppingCartOutlined, UserOutlined }
 import { Card, Col, Row, Statistic } from 'antd';
 import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn, FaTelegramPlane, FaMusic, FaWhatsapp } from 'react-icons/fa';
 import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 const resolveImageSrc = (src: string) => {
   try {
@@ -25,11 +31,37 @@ const resolveImageSrc = (src: string) => {
   return src;
 };
 
+// const slides = [
+//   { id: 1, title: "Yaz kampaniyası", description: "Təzə mövsüm, təzə fürsətlər! Yazın enerjisini alış-verişə daşıyın! Sezonun ən çox satılan məhsullarında xüsusi endirimlər sizi gözləyir. Geyimdən ev əşyalarına qədər minlərlə məhsulda yaz ruhunu hiss edin!", img: "https://tiktak-web.vercel.app/_next/image?url=https%3A%2F%2Fuploads.sarkhanrahimli.dev%2Fonlearn%2Fimages%2Fonlearn-file-2025_07_30_21_37_44-rsfr6p.webp&w=640&q=75" },
+//   { id: 2, title: "Teknoloji Festivali", description: "Yeni texnologiyalar, yeni imkanlar! Teknolojinin ən son inkişafı ilə tanış olun!", img: "https://tiktak-web.vercel.app/_next/image?url=https%3A%2F%2Fuploads.sarkhanrahimli.dev%2Fonlearn%2Fimages%2Fonlearn-file-2025_07_30_21_39_10-wog9nb.webp&w=640&q=75" },
+//   { id: 3, title: "Yeni il kampaniyası", description: "Yeni ilə birlikdə yeni imkanlar! Yeni ilin ən yaxşı təklifləri sizi gözləyir!", img: "https://tiktak-web.vercel.app/_next/image?url=https%3A%2F%2Fuploads.sarkhanrahimli.dev%2Fonlearn%2Fimages%2Fonlearn-file-2025_07_30_21_38_34-tykmu9.webp&w=640&q=75" },
+//   { id: 4, title: "Moda Heftesi", description: "Moda və stil haqqında ən son xəbərlər! Yeni yaxınlar və trendlər sizi gözləyir!", img: "https://tiktak-web.vercel.app/_next/image?url=https%3A%2F%2Fuploads.sarkhanrahimli.dev%2Fonlearn%2Fimages%2Fonlearn-file-2025_07_30_21_37_25-d0znbo.webp&w=640&q=75" },
+// ];
 const slides = [
-  { id: 1, title: "Yaz kampaniyası", description: "Təzə mövsüm, təzə fürsətlər! Yazın enerjisini alış-verişə daşıyın! Sezonun ən çox satılan məhsullarında xüsusi endirimlər sizi gözləyir. Geyimdən ev əşyalarına qədər minlərlə məhsulda yaz ruhunu hiss edin!", img: "https://tiktak-web.vercel.app/_next/image?url=https%3A%2F%2Fuploads.sarkhanrahimli.dev%2Fonlearn%2Fimages%2Fonlearn-file-2025_07_30_21_37_44-rsfr6p.webp&w=640&q=75" },
-  { id: 2, title: "Teknoloji Festivali", description: "Yeni texnologiyalar, yeni imkanlar! Teknolojinin ən son inkişafı ilə tanış olun!", img: "https://tiktak-web.vercel.app/_next/image?url=https%3A%2F%2Fuploads.sarkhanrahimli.dev%2Fonlearn%2Fimages%2Fonlearn-file-2025_07_30_21_39_10-wog9nb.webp&w=640&q=75" },
-  { id: 3, title: "Yeni il kampaniyası", description: "Yeni ilə birlikdə yeni imkanlar! Yeni ilin ən yaxşı təklifləri sizi gözləyir!", img: "https://tiktak-web.vercel.app/_next/image?url=https%3A%2F%2Fuploads.sarkhanrahimli.dev%2Fonlearn%2Fimages%2Fonlearn-file-2025_07_30_21_38_34-tykmu9.webp&w=640&q=75" },
-  { id: 4, title: "Moda Heftesi", description: "Moda və stil haqqında ən son xəbərlər! Yeni yaxınlar və trendlər sizi gözləyir!", img: "https://tiktak-web.vercel.app/_next/image?url=https%3A%2F%2Fuploads.sarkhanrahimli.dev%2Fonlearn%2Fimages%2Fonlearn-file-2025_07_30_21_37_25-d0znbo.webp&w=640&q=75" },
+  {
+    id: 1,
+    title: "Yaz kampaniyası",
+    description: "Təzə mövsüm, təzə fürsətlər!",
+    img: "https://uploads.sarkhanrahimli.dev/onlearn/images/onlearn-file-2025_07_30_21_37_44-rsfr6p.webp",
+  },
+  {
+    id: 2,
+    title: "Teknoloji Festivali",
+    description: "Yeni texnologiyalar!",
+    img: "https://uploads.sarkhanrahimli.dev/onlearn/images/onlearn-file-2025_07_30_21_39_10-wog9nb.webp",
+  },
+  {
+    id: 3,
+    title: "Yeni il kampaniyası",
+    description: "Yeni imkanlar!",
+    img: "https://uploads.sarkhanrahimli.dev/onlearn/images/onlearn-file-2025_07_30_21_38_34-tykmu9.webp",
+  },
+  {
+    id: 4,
+    title: "Moda Heftesi",
+    description: "Yeni trendlər!",
+    img: "https://uploads.sarkhanrahimli.dev/onlearn/images/onlearn-file-2025_07_30_21_37_25-d0znbo.webp",
+  },
 ];
 
 export default function LandingPage() {
@@ -51,33 +83,68 @@ export default function LandingPage() {
   const visibleSlides = slides.slice(page * 2, page * 2 + 2);
 
   return (
+   
     <div className={styles.container}>
-      <div className={styles.sliderContainer}>
-        <button className={styles.button} onClick={prev}>{"<"}</button>
+  <div className={styles.sliderContainer}>
 
-        <div className={`${styles.slidesWrapper} ${fading ? styles.fading : ''}`}>
-          {visibleSlides.map((slide) => (
-            <div key={slide.id} className={styles.slide}>
-              <Image src={resolveImageSrc(slide.img)} alt={slide.title} className={styles.slideImg} height={200} width={200} />
-              <div className={styles.slideContent}>
-                <h2 className={styles.slideTitle}>{slide.title}</h2>
-                <p className={styles.slideDescription}>{slide.description}</p>
-              </div>
-              <div className={styles.buttonContainer}>
-                <button
-                  className={styles.buttonCard}
-                  onClick={() => {
-                    router.push(`/category`);
-                  }}
-                >
-                  Ətraflı
-                </button>
-              </div>
+    <Swiper
+      modules={[Navigation, Pagination, Autoplay]}
+      navigation
+      pagination={{ clickable: true }}
+      autoplay={{ delay: 3000 }}
+      loop
+      spaceBetween={20}
+      
+       breakpoints={{
+    0: {
+      slidesPerView: 1,
+    },
+    768: {
+      slidesPerView: 2,
+    },
+  }}
+    >
+
+      {slides.map((slide) => (
+        <SwiperSlide key={slide.id}>
+          
+          <div className={styles.slide}>
+
+            <Image
+              src={resolveImageSrc(slide.img)}
+              alt={slide.title}
+              className={styles.slideImg}
+              height={200}
+              width={200}
+              quality={100}
+              priority
+            />
+
+            <div className={styles.slideContent}>
+              <h2 className={styles.slideTitle}>{slide.title}</h2>
+              <p className={styles.slideDescription}>
+                {slide.description}
+              </p>
             </div>
-          ))}
-        </div>
-        <button className={styles.button} onClick={next}>{">"}</button>
-      </div>
+
+            <div className={styles.buttonContainer}>
+              <button
+                className={styles.buttonCard}
+                onClick={() => router.push(`/category`)}
+              >
+                Ətraflı
+              </button>
+            </div>
+
+          </div>
+
+        </SwiperSlide>
+      ))}
+
+    </Swiper>
+
+  </div>
+
 
       <h3 className={styles.title1}>Xüsusi təkliflər!</h3>
       <p className={styles.text}>TİKTAK-da hər gün üçün xüsusi təklifləri qaçırmayın!</p>
@@ -100,7 +167,7 @@ export default function LandingPage() {
       <p className={styles.text}>Biz yeni imkanlar axtarırıq və digərlərinin bilmədikləri yerlərə getməyə hazırıq.</p>
       <Row gutter={16} style={{ marginTop: '40px'}}>
         <Col span={6}>
-          <Card variant="borderless">
+          <Card variant="borderless" className={styles.statCard}>
             <Statistic
               title="Market sayı"
               value={137}
@@ -110,7 +177,7 @@ export default function LandingPage() {
           </Card>
         </Col>
         <Col span={6}>
-          <Card variant="borderless">
+          <Card variant="borderless" className={styles.statCard}>
             <Statistic
               title="Region"
               value={11}
@@ -120,7 +187,7 @@ export default function LandingPage() {
           </Card>
         </Col>
         <Col span={6}>
-          <Card variant="borderless">
+          <Card variant="borderless" className={styles.statCard}>
             <Statistic
               title="Məhsul sayı"
               value="50000+"
@@ -130,7 +197,7 @@ export default function LandingPage() {
           </Card>
         </Col>
         <Col span={6}>
-          <Card variant="borderless">
+          <Card variant="borderless" className={styles.statCard}>
             <Statistic
               title="Əməkdaş sayı"
               value="5500+"
