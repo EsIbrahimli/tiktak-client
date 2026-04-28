@@ -17,21 +17,18 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (query.trim().length < 2) {
+    if (query.trim().length < 3) {
       setResults([]);
       return;
     }
+     const controller = new AbortController();
 
     const delay = setTimeout(() => {
       setLoading(true);
-      const normalize = (text: string) =>
-  text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    
 
       axiosInstance
-        .get("/products", { params: { search: query.trim() } })
+        .get("/products/search", { params: { query : query.trim() },signal: controller.signal })
         .then((res) => {
           console.log("SEARCH RESPONSE:", res.data);
           const data =Array.isArray(res.data?.data)
@@ -39,7 +36,7 @@ const Search = () => {
             : [];
             
 
-          setResults(Array.isArray(data) ? data : []);
+          setResults(data);
         })
         .catch(() => {
           setResults([]);
@@ -49,11 +46,14 @@ const Search = () => {
         });
     }, 400);
 
-    return () => clearTimeout(delay);
+    return () => {
+      clearTimeout(delay);
+      controller.abort();
+    };
   }, [query]);
 
-  const showDropdown = isFocused && query.trim().length >= 2;
- const products = results;
+  const showDropdown = isFocused && query.trim().length >= 3;
+ 
 
   return (
     <>
@@ -83,7 +83,7 @@ const Search = () => {
 
         {showDropdown && !loading && results.length > 0 && (
           <ul className={styles.results}>
-            {products.map((item) => (
+            {results.map((item) => (
               <li key={item.id} className={styles.item}>
                 <span>{item.name}</span>
                 <span>{item.price}₼</span>
