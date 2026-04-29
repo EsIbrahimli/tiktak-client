@@ -1,15 +1,21 @@
 .container {
   width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+ 
 }
 
 .sliderContainer {
   position: relative;
-  width: fit-content;
+  /* width: fit-content; */
+  width: 100%;
   margin: 50px auto 0;
+  padding: 0;
 }
 
 .slidesWrapper {
   display: flex;
+  
   gap: 20px;
   transition: opacity 0.3s ease;
 }
@@ -136,12 +142,15 @@
   gap: 20px;
   justify-content: center;
   margin-top: 20px;
+  padding: 0;
+  justify-content: flex-start;
 }
 
 /* Hər bir kart */
 .staticCard {
   position: relative;
-  width: 650px;
+  width: calc(50% - 10px);  
+ flex: 1;
   height: 320px;
   border-radius: 12px;
   overflow: hidden;
@@ -188,6 +197,14 @@
   font-size: 12px;
   color: #ddd;
 }
+.statCard {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.statCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
 
 .title1 {
   font-size: 2rem;
@@ -231,9 +248,7 @@
   margin-bottom: 30px;
 }
 
-.footerColumn a:hover {
-  text-decoration: underline;
-}
+
 
 .footerBottom {
   font-size: 0.8rem;
@@ -251,6 +266,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  
 
 }
 
@@ -260,6 +276,12 @@
   color: rgb(82, 82, 82);
   font-size: 14px;
   text-align: left;
+ 
+  
+}
+.links div ul li:hover {
+  color: #19793b;
+  
 }
 
 .subscribe {
