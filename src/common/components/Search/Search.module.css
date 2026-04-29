@@ -7,7 +7,7 @@
 
 .searchBox {
     position: relative;
-    width: 420px;
+    width: 100%;
     max-width: 100%;
     z-index: 31;
 }
@@ -23,6 +23,8 @@
     background: #f3f4f6;
     border: none;
     outline: none;
+    font-size: 14px;
+    box-sizing: border-box;
 }
 
 .input:focus {

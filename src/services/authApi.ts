@@ -76,7 +76,8 @@ export const getAccount = async (): Promise<Account> => {
 export const updateAccount = async (payload: Partial<Account>): Promise<Account> => {
   try {
     const fullName = (payload.name ?? payload.full_name ?? "").toString().trim();
-    const phone = (payload.phone ?? "").toString().trim();
+    const phoneRaw = (payload.phone ?? "").toString().trim();
+    const phone = phoneRaw;
     const email = (payload.email ?? "").toString().trim();
     const adress = (payload.adress ?? "").toString().trim();
     const password = (payload.password ?? "").toString().trim();

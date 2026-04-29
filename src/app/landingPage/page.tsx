@@ -165,8 +165,8 @@ export default function LandingPage() {
       </div>
       <h4 className={styles.title1}>Bizim göstəricilər</h4>
       <p className={styles.text}>Biz yeni imkanlar axtarırıq və digərlərinin bilmədikləri yerlərə getməyə hazırıq.</p>
-      <Row gutter={16} style={{ marginTop: '40px'}}>
-        <Col span={6}>
+      <Row gutter={[16, 16]} style={{ marginTop: '40px'}}>
+        <Col xs={24} sm={12} md={6}>
           <Card variant="borderless" className={styles.statCard}>
             <Statistic
               title="Market sayı"
@@ -176,7 +176,7 @@ export default function LandingPage() {
             />
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={24} sm={12} md={6}>
           <Card variant="borderless" className={styles.statCard}>
             <Statistic
               title="Region"
@@ -186,7 +186,7 @@ export default function LandingPage() {
             />
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={24} sm={12} md={6}>
           <Card variant="borderless" className={styles.statCard}>
             <Statistic
               title="Məhsul sayı"
@@ -196,7 +196,7 @@ export default function LandingPage() {
             />
           </Card>
         </Col>
-        <Col span={6}>
+        <Col xs={24} sm={12} md={6}>
           <Card variant="borderless" className={styles.statCard}>
             <Statistic
               title="Əməkdaş sayı"
@@ -208,7 +208,7 @@ export default function LandingPage() {
         </Col>
       </Row>
 
-      <h5 className={styles.title2}>TIK TAK</h5>
+      <h5 className={styles.title2}>TİK TAK</h5>
       <footer className={styles.footer}>
         <div className={styles.links}>
           <div className={styles.footerColumn}>

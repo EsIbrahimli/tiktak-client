@@ -2,20 +2,17 @@
   width: 100%;
   padding: 0 20px;
   margin: 0 auto;
- 
 }
 
 .sliderContainer {
   position: relative;
-  /* width: fit-content; */
   width: 100%;
-  margin: 50px auto 0;
+  margin: 40px auto 0;
   padding: 0;
 }
 
 .slidesWrapper {
   display: flex;
-  
   gap: 20px;
   transition: opacity 0.3s ease;
 }
@@ -41,7 +38,6 @@
   flex-shrink: 0;
   overflow: hidden;
 }
-
 
 .slideTitle {
   color: white;
@@ -128,8 +124,6 @@
   cursor: pointer;
   transition: background 0.2s ease;
   max-width: 100px;
-
-
 }
 
 .buttonCard:hover {
@@ -140,22 +134,20 @@
 .staticCardsContainer {
   display: flex;
   gap: 20px;
-  justify-content: center;
   margin-top: 20px;
   padding: 0;
-  justify-content: flex-start;
 }
 
 /* Hər bir kart */
 .staticCard {
   position: relative;
-  width: calc(50% - 10px);  
- flex: 1;
+  flex: 1;
+  min-width: 0;
   height: 320px;
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.3s ease, all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .staticCard:hover {
@@ -187,20 +179,22 @@
 }
 
 .staticCardOverlay h3 {
-  padding: 20px 0px 0px 10px;
+  padding: 20px 0 0 10px;
   font-size: 20px;
   font-weight: bold;
 }
 
 .staticCardOverlay p {
-  padding: 0px 0px 0px 10px;
+  padding: 0 0 0 10px;
   font-size: 12px;
   color: #ddd;
 }
+
 .statCard {
   transition: all 0.3s ease;
   cursor: pointer;
 }
+
 .statCard:hover {
   transform: translateY(-6px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
@@ -226,15 +220,6 @@
 }
 
 /* Footer */
-.footerContent {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-}
-
 .footer {
   margin-top: 20px;
   border-top: 1px solid #eee;
@@ -245,10 +230,15 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 24px;
   margin-bottom: 30px;
+  padding-top: 24px;
 }
 
-
+.footerColumn {
+  display: flex;
+  flex-direction: column;
+}
 
 .footerBottom {
   font-size: 0.8rem;
@@ -266,8 +256,6 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  
-
 }
 
 .links div ul li {
@@ -276,12 +264,15 @@
   color: rgb(82, 82, 82);
   font-size: 14px;
   text-align: left;
- 
-  
 }
+
+.links div ul li a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .links div ul li:hover {
   color: #19793b;
-  
 }
 
 .subscribe {
@@ -295,6 +286,8 @@
   border-radius: 4px;
   outline: none;
   font-size: 14px;
+  min-width: 0;
+  flex: 1;
 }
 
 .subscribe button {
@@ -305,18 +298,19 @@
   padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .socialInfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid  rgb(212, 212, 212);
+  border-top: 1px solid rgb(212, 212, 212);
   font-size: 12px;
   color: #777;
   flex-wrap: wrap;
   gap: 10px;
-  padding: 30px 0px 40px 0px;
+  padding: 30px 0 40px;
 }
 
 .social {
@@ -333,6 +327,99 @@
 }
 
 .social a:hover {
-  opacity: 0.6;;
+  opacity: 0.6;
   transform: scale(1.2);
+}
+
+/* ── Tablet (768px – 1024px) ── */
+@media (max-width: 1024px) {
+  .slide {
+    min-width: 0;
+    height: 260px;
+  }
+
+  .staticCard {
+    height: 260px;
+  }
+
+  .title1 {
+    font-size: 1.6rem;
+    margin-top: 40px;
+  }
+
+  .title2 {
+    font-size: 1.3rem;
+    margin-top: 50px;
+  }
+
+  .links {
+    gap: 16px;
+  }
+}
+
+/* ── Mobile (< 768px) ── */
+@media (max-width: 767px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .sliderContainer {
+    margin-top: 20px;
+  }
+
+  .slide {
+    min-width: 0;
+    height: 220px;
+  }
+
+  .slideTitle {
+    font-size: 1.1rem;
+  }
+
+  .slideDescription {
+    font-size: 0.85rem;
+  }
+
+  /* Stack promo cards vertically */
+  .staticCardsContainer {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .staticCard {
+    height: 220px;
+    width: 100%;
+  }
+
+  .title1 {
+    font-size: 1.3rem;
+    margin-top: 32px;
+  }
+
+  .text {
+    font-size: 13px;
+  }
+
+  .title2 {
+    font-size: 1.1rem;
+    margin-top: 36px;
+  }
+
+  /* Footer links stack */
+  .links {
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+  }
+
+  .subscribe {
+    flex-wrap: nowrap;
+  }
+
+  .socialInfo {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 0 28px;
+  }
 }

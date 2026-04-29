@@ -25,7 +25,7 @@ export default function RouteContainer({ children }: RouteContainerProps) {
   }, [pathname]);
 
   return (
-    <div ref={scrollRef} className={shouldUseFullWidth ? "h-full" : "w-[80%] mx-auto h-full"}>
+    <div ref={scrollRef} className={shouldUseFullWidth ? "h-full" : "w-[94%] sm:w-[92%] md:w-[90%] lg:w-[80%] mx-auto h-full"}>
       {children}
     </div>
   );

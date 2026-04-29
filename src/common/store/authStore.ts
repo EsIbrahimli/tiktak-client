@@ -19,6 +19,8 @@ export interface AuthResponse {
 interface AuthState {
 	loading: boolean;
 	token: string | null;
+	savedPhone: string
+	savedPassword: string
 	login: (payload: LoginRequest) => Promise<AuthResponse>;
 	signup: (payload: RegisterRequest) => Promise<AuthResponse | null>;
 	logout: () => void;
@@ -35,6 +37,8 @@ const getStoredToken = (): string | null => {
 export const useAuthStore = create<AuthState>((set) => ({
 	loading: false,
 	token: getStoredToken(),
+	savedPhone: typeof window !== "undefined" ? (localStorage.getItem("savedPhone") ?? "+994559916601") : "+994559916601",
+	savedPassword: '1234',
 	login: async (payload) => {
 		set({ loading: true });
 		try {
@@ -43,7 +47,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 			if (!token) {
 				throw new Error("Access token tapilmadi");
 			}
-
+			localStorage.setItem("savedPhone", payload.phone)
 			localStorage.setItem("token", token);
 			set({ token });
 			return { token };
@@ -51,7 +55,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 			set({ loading: false });
 		}
 	},
-    
+
 	signup: async (payload) => {
 		set({ loading: true });
 		try {
@@ -69,7 +73,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 	},
 	logout: () => {
 		localStorage.removeItem("token");
-		set({ token: null });
+		set({ token: null, savedPassword: '' });
 	},
 }));
 

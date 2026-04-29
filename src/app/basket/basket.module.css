@@ -248,3 +248,65 @@
   font-weight: 700;
   margin-bottom: 20px;
 }
+
+/* ── Tablet (768px – 1024px) ── */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .basketItems {
+    max-width: 100%;
+  }
+
+  .basketTotalWrapper {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+/* ── Mobile (< 768px) ── */
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    margin-top: 8px;
+  }
+
+  .basketItems {
+    max-width: 100%;
+  }
+
+  .basketTotalWrapper {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .basketHeaderActions h1 {
+    font-size: 20px;
+  }
+
+  .basketItem {
+    padding: 8px 10px;
+  }
+
+  .itemImage {
+    width: 60px;
+    height: 48px;
+  }
+
+  .itemName {
+    font-size: 13px;
+  }
+
+  .basketTotal h3 {
+    font-size: 17px;
+  }
+
+  .checkoutButton {
+    font-size: 15px;
+  }
+}

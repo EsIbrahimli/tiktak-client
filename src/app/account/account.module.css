@@ -181,10 +181,12 @@
 
 .table th {
   text-align: left;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 500;
   color: #777;
   background-color: #f3f4f6;
   padding: 10px 14px;
+  white-space: nowrap;
 }
 
 .table thead th:first-child {
@@ -196,8 +198,12 @@
 }
 
 .table td {
-  padding: 12px 0;
+  padding: 11px 14px;
   border-top: 1px solid #eee;
+  font-size: 13px;
+  font-weight: 400;
+  color: #444;
+  vertical-align: middle;
 }
 
 /* status badge */
@@ -215,4 +221,114 @@
 .success {
   background: #e6f9ec;
   color: #22c55e;
+}
+
+/* ── Tablet (768px – 1024px) ── */
+@media (max-width: 1024px) {
+  .wrapper {
+    flex-direction: column;
+    gap: 16px;
+    margin: 20px 0 0;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 16px;
+  }
+
+  .sidebar a {
+    display: inline-flex;
+    margin-right: 8px;
+  }
+
+  .menuItem {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+
+  .formItem {
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .formName,
+  .formEmail,
+  .formAdress,
+  .formPhone,
+  .formPassword,
+  .formPasswordConfirm {
+    width: 48%;
+  }
+}
+
+/* ── Mobile (< 768px) ── */
+@media (max-width: 767px) {
+  .wrapper {
+    flex-direction: column;
+    gap: 12px;
+    margin: 12px 0 0;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    padding: 12px;
+    border-radius: 12px;
+    overflow-x: auto;
+  }
+
+  .sidebar h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .sidebar a {
+    display: inline-flex;
+    margin-right: 6px;
+  }
+
+  .menuItem {
+    display: inline-block;
+    padding: 8px 10px;
+    font-size: 13px;
+    margin-bottom: 0;
+  }
+
+  .content {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .formItem {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .formName,
+  .formEmail,
+  .formAdress,
+  .formPhone,
+  .formPassword,
+  .formPasswordConfirm {
+    width: 100%;
+  }
+
+  .button {
+    width: 100%;
+    margin: 0;
+    margin-top: 16px;
+  }
+
+  .table th,
+  .table td {
+    font-size: 12px;
+    padding: 8px 6px;
+  }
 }

@@ -160,3 +160,29 @@
   font-weight: 600;
   cursor: pointer;
 }
+
+/* ── Tablet & Mobile ── */
+@media (max-width: 1024px) {
+  .basket {
+    max-width: 100%;
+  }
+
+  .checkoutButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    margin-top: 16px;
+  }
+
+  .basket {
+    max-width: 100%;
+  }
+
+  .checkoutButton {
+    width: 100%;
+    font-size: 15px;
+  }
+}

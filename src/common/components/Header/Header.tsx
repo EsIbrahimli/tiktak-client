@@ -29,7 +29,7 @@ const Header = () => {
             <div className={styles.container}>
                 <div className={styles.leftSection}>
                     <Link href="/" className={styles.brand}>
-                        TIK TAK
+                        TİK TAK
                     </Link>
 
                     {!isLanding && !is404Page && (
@@ -52,15 +52,15 @@ const Header = () => {
                 <div className={styles.rightSection}>
                     <nav className={styles.nav}>
                         <Link className={styles.link} href="/account">
-                            <IoPersonOutline /> Hesabim
+                            <IoPersonOutline /> <span className={styles.linkText}>Hesabim</span>
                         </Link>
                         <Link className={styles.link} href="/favorites">
                             <MdFavoriteBorder />
-                            Siyahilarim
+                            <span className={styles.linkText}>Siyahilarim</span>
                         </Link>
                         <Link className={styles.link} href="/basket">
                             <SlBasket />
-                            Sebetim
+                            <span className={styles.linkText}>Sebetim</span>
                         </Link>
                     </nav>
                 </div>

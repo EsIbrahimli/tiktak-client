@@ -40,6 +40,11 @@ export default function AccountInfo() {
 
   useEffect(() => {
     fetchAccount();
+    const savedPhone = localStorage.getItem("account_phone");
+    if (savedPhone) {
+      setForm((prev) => ({ ...prev, phone: savedPhone }));
+      setTouched((prev) => ({ ...prev, phone: true }));
+    }
   }, [fetchAccount]);
 
   useEffect(() => {
@@ -99,6 +104,7 @@ export default function AccountInfo() {
     const success = await updateAccountData(payload);
 
     if (success) {
+      localStorage.setItem("account_phone", resolvedPhone);
       setForm((prev) => ({ ...prev, password: "", passwordConfirm: "" }));
       if (form.password) {
         try {
